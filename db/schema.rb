@@ -10,9 +10,55 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_14_162036) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_14_164649) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "requests", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "shift_id", null: false
+    t.bigint "schedule_id", null: false
+    t.datetime "date_of_request", precision: nil
+    t.text "comment"
+    t.string "request_type"
+    t.string "request_status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["schedule_id"], name: "index_requests_on_schedule_id"
+    t.index ["shift_id"], name: "index_requests_on_shift_id"
+    t.index ["user_id"], name: "index_requests_on_user_id"
+  end
+
+  create_table "schedules", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.date "date"
+    t.bigint "site_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["site_id"], name: "index_schedules_on_site_id"
+    t.index ["user_id"], name: "index_schedules_on_user_id"
+  end
+
+  create_table "shifts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "schedule_id", null: false
+    t.date "shift_date"
+    t.time "shift_time"
+    t.boolean "clocked_in"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["schedule_id"], name: "index_shifts_on_schedule_id"
+    t.index ["user_id"], name: "index_shifts_on_user_id"
+  end
+
+  create_table "sites", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_sites_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -22,7 +68,20 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_14_162036) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.date "date_availability"
+    t.integer "hours"
+    t.boolean "manager"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
+  add_foreign_key "requests", "schedules"
+  add_foreign_key "requests", "shifts"
+  add_foreign_key "requests", "users"
+  add_foreign_key "schedules", "sites"
+  add_foreign_key "schedules", "users"
+  add_foreign_key "shifts", "schedules"
+  add_foreign_key "shifts", "users"
+  add_foreign_key "sites", "users"
 end
