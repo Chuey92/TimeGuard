@@ -1,0 +1,13 @@
+<%= form_with model: request, local: true do |f| %>
+  <div class="field">
+    <%= f.label :request_type %>
+    <%= f.text_field :request_type %>
+  </div>
+  <div class="field">
+    <%= f.label :comment %>
+    <%= f.text_area :comment %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
