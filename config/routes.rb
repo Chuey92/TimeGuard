@@ -13,4 +13,23 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+  resources :sites
+
+  resources :schedules do
+    resources :shifts
+  end
+
+  resources :shifts do
+    member do
+      post "clock_in"
+    end
+  end
+
+ resources :requests do
+    member do
+      patch 'approve'
+      patch 'reject'
+    end
+  end
 end
