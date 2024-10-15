@@ -27,11 +27,12 @@ class ShiftsController < ApplicationController
 
   def update
     authorize @shift
+    @shift = Shift.find(params[:id])
     if @shift.update(shift_params)
-      redirect_to @shift, notice: "Shift updated successfully."
+      render json: @shift
     else
-      render :edit
-    end
+      render json: { error: @shift.errors.full_messages }, status: :unprocessable_entity
+    end :edit
   end
 
   def destroy
@@ -58,7 +59,7 @@ class ShiftsController < ApplicationController
   end
 
   def shift_params
-    params.require(:shift).permit(:user_id, :schedule_id, :shift_date, :shift_time, :clocked_in)
+    params.require(:shift).permit(:user_id, :schedule_id, :shift_date, :shift_time, :clocked_in, :start_time, :end_time)
   end
 
   def location_matches_site?
