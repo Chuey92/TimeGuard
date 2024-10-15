@@ -8,4 +8,8 @@ class User < ApplicationRecord
   has_many :shifts
   has_many :sites
   has_many :requests
+
+  validates :name, presence: true
+  validates :hours, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :manager, inclusion: { in: [true, false] }
 end
