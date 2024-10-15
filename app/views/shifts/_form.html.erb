@@ -1,0 +1,13 @@
+<%= form_with model: shift, local: true do |f| %>
+  <div class="field">
+    <%= f.label :shift_date %>
+    <%= f.date_field :shift_date %>
+  </div>
+  <div class="field">
+    <%= f.label :shift_time %>
+    <%= f.time_field :shift_time %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
