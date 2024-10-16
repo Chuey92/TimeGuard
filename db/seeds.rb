@@ -14,6 +14,7 @@ Request.destroy_all
 Shift.destroy_all
 Schedule.destroy_all
 Site.destroy_all
+User.destroy_all
 
 # Define manager users with necessary fields and validations
 manager_users = [
