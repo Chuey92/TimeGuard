@@ -1,0 +1,6 @@
+<h1>All Sites</h1>
+<ul>
+  <% @sites.each do |site| %>
+    <li><%= site.name %> - <%= site.address %></li>
+  <% end %>
+</ul>

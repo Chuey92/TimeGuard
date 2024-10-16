@@ -1,0 +1,6 @@
+<h1>All Requests</h1>
+<ul>
+  <% @requests.each do |request| %>
+    <li><%= request.request_type %> - <%= request.request_status %></li>
+  <% end %>
+</ul>
