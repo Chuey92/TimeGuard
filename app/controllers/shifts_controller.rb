@@ -1,6 +1,6 @@
 class ShiftsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_shift, only: [:show, :edit, :update, :destroy, :clock_in]
+  before_action :set_shift, only: %i[show edit update destroy clock_in]
 
   def index
     @shifts = policy_scope(Shift)
@@ -32,7 +32,7 @@ class ShiftsController < ApplicationController
       render json: @shift
     else
       render json: { error: @shift.errors.full_messages }, status: :unprocessable_entity
-    end :edit
+    end
   end
 
   def destroy
