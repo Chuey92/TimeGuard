@@ -1,9 +1,10 @@
 class RequestsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_request, only: [:show, :edit, :update, :approve, :reject]
+  before_action :set_request, only: [:show, :update, :approve, :reject]
 
   def index
     @requests = policy_scope(Request)
+    render json: @requests
   end
 
   def show
@@ -23,6 +24,11 @@ class RequestsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def edit
+    @request = Request.find(params[:id])
+    authorize @request
   end
 
   def update
