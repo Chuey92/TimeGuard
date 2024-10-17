@@ -12,7 +12,7 @@ class RequestPolicy < ApplicationPolicy
   end
 
   def create?
-    true  # Allow everyone to create requests (both managers and employees)
+    true # Allow everyone to create requests (both managers and employees)
   end
 
   def update?
