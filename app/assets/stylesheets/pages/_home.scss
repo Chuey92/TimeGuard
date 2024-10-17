@@ -1,1 +1,68 @@
 // Specific CSS for your home-page
+.container-landing {
+  width: 100vw;
+  height: 80vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top:0px;
+  padding:0;
+}
+
+.content-landing {
+  flex: 1;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 20px 0 0px;
+    h1{
+      margin-bottom: 10px;
+    }
+}
+
+.img-landing {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  height:80%;
+  margin-right: 25px;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 3px;
+  background-color: white;
+}
+
+.btns-landing {
+  display: flex;
+  justify-content: left;
+  gap: 5px;
+}
+
+
+
+@keyframes gradientBG {
+  0% {
+      background-position: 0% 50%;
+  }
+  50% {
+      background-position: 100% 50%;
+  }
+  100% {
+      background-position: 0% 50%;
+  }
+}
+
+.container-landing {
+  background: linear-gradient(-225deg, #adeae9, #C5C1FF, #FFBAC3);
+
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  height: 100vh;
+}
