@@ -95,9 +95,12 @@ non_manager_user2 = User.find_by(email: "bob@example.com")
 
 # Create sites in London associated with a manager
 sites = Site.create!([
-  { name: "London Headquarters", address: "123 Baker St, London", user: manager_user1 },
-  { name: "London Tech Hub", address: "456 Oxford St, London", user: manager_user2 },
-  { name: "London Office Space", address: "789 Regent St, London", user: manager_user3 }
+  { name: "London Headquarters", address: "123 Baker St, London", user: manager_user1, latitude: 51.5216549,
+    longitude: -0.1574937 },
+  { name: "London Tech Hub", address: "456 Oxford St, London", user: manager_user2, latitude: 42.99857566666667,
+    longitude: -81.24332379999998 },
+  { name: "London Office Space", address: "789 Regent St, London", user: manager_user3, latitude: 51.5125346,
+    longitude: -0.140195 }
 ])
 
 # add latitude & longitude manually
