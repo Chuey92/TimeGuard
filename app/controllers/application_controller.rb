@@ -1,10 +1,17 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
+  # before_action: :user_search
 
   include Pundit::Authorization
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
+  
+
+  # def user_search
+  #   @user = User.where(current_user,current_user.id) if current_user.present?
+  # end
 
   private
 
