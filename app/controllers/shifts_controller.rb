@@ -1,6 +1,6 @@
 class ShiftsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_shift, only: [:show, :update, :destroy, :clock_in]
+  before_action :set_shift, only: [:show, :edit, :update, :destroy, :clock_in]
 
   def index
     @shifts = policy_scope(Shift)
@@ -27,7 +27,6 @@ class ShiftsController < ApplicationController
 
   def update
     authorize @shift
-    @shift = Shift.find(params[:id])
     if @shift.update(shift_params)
       render json: @shift
     else
