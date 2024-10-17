@@ -101,12 +101,11 @@ sites = Site.create!([
 ])
 
 # add latitude & longitude manually
-# site = Site.find(3)
-# coordinates = site.geocode
-# site.latitude = coordinates[0]
-# site.longitude = coordinates[1]
-# site.save
-
+site = Site.find(62)
+coordinates = site.geocode
+site.latitude = coordinates[0]
+site.longitude = coordinates[1]
+site.save
 
 # Create schedules for the non-manager users
 schedules = Schedule.create!([
