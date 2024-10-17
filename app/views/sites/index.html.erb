@@ -1,14 +1,26 @@
-<h1>All Sites</h1>
-<ul>
-  <% @sites.each do |site| %>
-    <li><%= site.name %> - <%= site.address %></li>
-  <% end %>
-</ul>
+<body>
+<div class='container flex mt-3'>
 
 
-<div style="width: 100%; height: 600px;"
-  data-controller="map"
-  data-map-markers-value="<%= @markers.to_json %>"
-  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+  <div class="menu-bar">
+    <div class="menu-bar-body">
+      <h5 class="menu-bar-title">Menu</h5>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><a href="#" class="text-decoration-none">Button 1</a></li>
+        <li class="list-group-item"><a href="#" class="text-decoration-none">Button 2</a></li>
+        <li class="list-group-item"><a href="#" class="text-decoration-none">Button 3</a></li>
+      </ul>
+    </div>
+  </div>
 
-<div data-controller="hello"></div>
+  <div style="width: 70%; height: 450px;"
+    data-controller="map"
+    data-map-markers-value="<%= @markers.to_json %>"
+    data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+  </div>
+
+
+
+</div>
+
+</body>

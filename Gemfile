@@ -42,8 +42,6 @@ gem "simple_form", github: "heartcombo/simple_form"
 gem "sassc-rails"
 
 gem "pundit"
-gem "jquery-rails"
-gem "jquery-ui-rails"
 gem "geocoder"
 
 group :development, :test do
