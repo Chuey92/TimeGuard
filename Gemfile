@@ -45,8 +45,6 @@ gem "webpacker", "~> 5.0"
 gem "ransack"
 
 gem "pundit"
-gem "jquery-rails"
-gem "jquery-ui-rails"
 
 group :development, :test do
   gem "dotenv-rails"
