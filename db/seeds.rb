@@ -28,7 +28,7 @@ manager_users = [
     password: "password123",
     date_availability: Date.today,
     hours: 40,
-    manager: true
+    manager: false
   }
 ]
 
