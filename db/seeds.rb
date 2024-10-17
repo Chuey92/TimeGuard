@@ -100,6 +100,14 @@ sites = Site.create!([
   { name: "London Office Space", address: "789 Regent St, London", user: manager_user3 }
 ])
 
+# add latitude & longitude manually
+# site = Site.find(3)
+# coordinates = site.geocode
+# site.latitude = coordinates[0]
+# site.longitude = coordinates[1]
+# site.save
+
+
 # Create schedules for the non-manager users
 schedules = Schedule.create!([
   { user: non_manager_user1, date: Date.today, site: sites[0] },
