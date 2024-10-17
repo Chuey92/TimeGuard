@@ -7,6 +7,14 @@
     <%= f.label :shift_time %>
     <%= f.time_field :shift_time %>
   </div>
+  <div class="field">
+    <%= f.label :user_id, "Assign to Employee" %>
+    <%= f.collection_select :user_id, User.all, :id, :name, prompt: "Select Employee" %>
+  </div>
+  <div class="field">
+    <%= f.label :schedule_id, "Assign to Schedule" %>
+    <%= f.collection_select :schedule_id, Schedule.all, :id, :date, prompt: "Select Schedule" %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

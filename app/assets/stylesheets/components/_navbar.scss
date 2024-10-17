@@ -4,9 +4,24 @@
 }
 
 .navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
+  flex-grow: 1; /* Allow collapse to expand */
 }
 
 .navbar-lewagon .navbar-brand img {
   width: 40px;
+  height: auto;
+}
+
+.navbar-lewagon .navbar-nav .nav-link {
+  color: #333; /* Dark text on white background */
+}
+
+.navbar-lewagon .navbar-nav .nav-link:hover {
+  color: #ffcc00; /* Highlight color on hover */
+  text-decoration: underline;
+}
+
+.navbar-lewagon .dropdown-menu {
+  right: 0;
+  left: auto;
 }

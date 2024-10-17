@@ -1,46 +1,22 @@
-<table id="schedule-table">
-  <thead>
-    <tr>
-      <th>Time</th>
-      <th>Shift</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% (0..23).each do |hour| %>
-      <tr>
-        <td><%= Time.now.change(hour: hour).strftime('%I:%M %p') %></td>
-        <td>
-          <% @shifts.select { |s| s.start_time.hour <= hour && s.end_time.hour > hour }.each do |shift| %>
-            <div class="shift" data-shift-id="<%= shift.id %>" style="left: <%= ((shift.start_time.min / 60.0) * 100).to_i %>%; width: <%= ((shift.end_time - shift.start_time) / 3600.0 * 100).to_i %>%;">
-              <%= shift.title %>
-            </div>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="page-container">
+  <h1>Your Shifts</h1>
 
-<script>
-  $(function() {
-    $("#schedule-table .shift").resizable({
-      handles: "e",
-      stop: function(event, ui) {
-        var shiftId = $(this).data("shift-id");
-        var startTime = new Date(new Date().setHours(0, (ui.position.left / $(this).parent().width() * 24 * 60), 0, 0));
-        var endTime = new Date(startTime.getTime() + (ui.size.width / $(this).parent().width() * 24 * 3600 * 1000));
-        $.ajax({
-          url: "<%= shift_path(id: 'SHIFT_ID') %>".replace("SHIFT_ID", shiftId),
-          type: "PATCH",
-          data: { shift: { start_time: startTime.toISOString(), end_time: endTime.toISOString() } },
-          success: function(data) {
-            console.log("Shift updated:", data);
-          },
-          error: function(xhr, status, error) {
-            console.error("Error updating shift:", error);
-          }
-        });
-      }
-    });
-  });
-</script>
+  <div class="card-container">
+    <% @shifts.each do |shift| %>
+      <div class="card">
+        <h2><%= shift.user.name %></h2>
+        <p><strong>Shift Date:</strong> <%= shift.shift_date.strftime("%B %d, %Y") %></p>
+        <p><strong>Shift Time:</strong> <%= shift.shift_time.strftime("%I:%M %p") %></p>
+        <p><strong>Site:</strong> <%= shift.schedule.site.name %> (<%= shift.schedule.site.address %>)</p>
+        <p><strong>Clocked In:</strong> <%= shift.clocked_in ? "Yes" : "No" %></p>
+        <p>
+          <%= link_to "View Shift", shift_path(shift), class: "btn btn-primary" %>
+          <% if current_user.manager? %>
+            <%= link_to "Edit Shift", edit_shift_path(shift), class: "btn btn-secondary" %>
+            <%= link_to "Delete Shift", shift_path(shift), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+          <% end %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+</div>

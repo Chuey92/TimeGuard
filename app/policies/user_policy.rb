@@ -11,7 +11,6 @@ class UserPolicy < ApplicationPolicy
   def show?
     user.manager? || record == user
   end
-end
 
   class Scope < ApplicationPolicy::Scope
     # NOTE: Be explicit about which records you allow access to!

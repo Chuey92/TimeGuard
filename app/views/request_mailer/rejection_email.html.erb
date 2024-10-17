@@ -1,0 +1,6 @@
+<h1>Your Request Has Been Rejected</h1>
+<p>Dear <%= @request.user.name %>,</p>
+<p>Your request for <strong><%= @request.request_type.capitalize %></strong> has been rejected.</p>
+<p>Comment from Manager:</p>
+<p><%= @request.comment %></p>
+<p>Thank you,<br>Time Guard Team</p>

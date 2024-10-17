@@ -8,6 +8,7 @@ class ApplicationPolicy
     @record = record
   end
 
+  # Define default actions
   def index?
     false
   end
@@ -37,6 +38,8 @@ class ApplicationPolicy
   end
 
   class Scope
+    attr_reader :user, :scope
+
     def initialize(user, scope)
       @user = user
       @scope = scope
@@ -45,9 +48,5 @@ class ApplicationPolicy
     def resolve
       raise NoMethodError, "You must define #resolve in #{self.class}"
     end
-
-    private
-
-    attr_reader :user, :scope
   end
 end

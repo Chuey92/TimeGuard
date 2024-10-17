@@ -1,10 +1,12 @@
+# app/controllers/requests_controller.rb
+
 class RequestsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_request, only: [:show, :update, :approve, :reject]
+  before_action :set_request, only: [:show, :edit, :update, :approve, :reject]
 
   def index
-    @requests = policy_scope(Request)
-    render json: @requests
+    @requests = policy_scope(Request).includes(:user, :shift, :schedule).order(created_at: :desc)
+    # No need to authorize the array, each individual request will be authorized in the view
   end
 
   def show
@@ -17,24 +19,23 @@ class RequestsController < ApplicationController
   end
 
   def create
-    @request = Request.new(request_params)
+    @request = current_user.requests.build(request_params)
     authorize @request
     if @request.save
-      redirect_to @request, notice: "Request created successfully."
+      redirect_to requests_path, notice: "Request created successfully."
     else
       render :new
     end
   end
 
   def edit
-    @request = Request.find(params[:id])
     authorize @request
   end
 
   def update
     authorize @request
     if @request.update(request_params)
-      redirect_to @request, notice: "Request updated successfully."
+      redirect_to requests_path, notice: "Request updated successfully."
     else
       render :edit
     end
@@ -42,14 +43,12 @@ class RequestsController < ApplicationController
 
   def approve
     authorize @request, :approve?
-    @request.update(request_status: "approved")
-    redirect_to @request, notice: "Request approved."
+    handle_request_update("approved", params[:comment])  # Call to a helper method
   end
 
   def reject
     authorize @request, :reject?
-    @request.update(request_status: "rejected")
-    redirect_to @request, notice: "Request rejected."
+    handle_request_update("rejected", params[:comment])  # Call to a helper method
   end
 
   private
@@ -60,5 +59,27 @@ class RequestsController < ApplicationController
 
   def request_params
     params.require(:request).permit(:shift_id, :schedule_id, :date_of_request, :comment, :request_type, :request_status)
+  end
+
+  def handle_request_update(status, comment)
+    respond_to do |format|
+      if @request.update(request_status: status, comment: comment)
+        send_approval_or_rejection_email(status)
+        flash[:notice] = "Request #{status} successfully."
+      else
+        flash[:alert] = "Failed to #{status} the request."
+      end
+
+      format.html { redirect_to requests_path }
+      format.js # Renders the appropriate .js.erb file
+    end
+  end
+
+  def send_approval_or_rejection_email(status)
+    if status == "approved"
+      RequestMailer.approval_email(@request).deliver_later
+    else
+      RequestMailer.rejection_email(@request).deliver_later
+    end
   end
 end

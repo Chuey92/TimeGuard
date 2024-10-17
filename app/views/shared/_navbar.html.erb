@@ -1,6 +1,6 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
-    <%= link_to "#", class: "navbar-brand" do %>
+    <%= link_to root_path, class: "navbar-brand" do %>
       <%= image_tag "logo.png" %>
     <% end %>
 
@@ -9,22 +9,47 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto">
+      <!-- Left-aligned links (Home, Sites, etc.) -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <% if user_signed_in? %>
           <li class="nav-item active">
-          <%= link_to "Home", root_path, class: "nav-link" %>
+            <%= link_to "Home", root_path, class: "nav-link" %>
           </li>
-          <li class="nav-item">
-            <%= link_to "Messages", "#", class: "nav-link" %>
-          </li>
+          <% if current_user.manager? %>
+            <li class="nav-item">
+              <%= link_to "Sites", sites_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Shifts", shifts_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Schedule", schedules_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Requests", requests_path, class: "nav-link" %>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to "Sites", sites_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Shifts", shifts_path, class: "nav-link" %>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+
+      
+      <ul class="navbar-nav ms-auto">
+        <% if user_signed_in? %>
           <li class="nav-item dropdown">
-          <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
-          </a>
+            <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <%= image_tag "https://static.vecteezy.com/system/resources/previews/021/548/095/non_2x/default-profile-picture-avatar-user-avatar-icon-person-icon-head-icon-profile-picture-icons-default-anonymous-user-male-and-female-businessman-photo-placeholder-social-network-avatar-portrait-free-vector.jpg", class: "avatar", alt: "dropdown menu" %>
+            </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Action", "#", class: "dropdown-item" %>
-              <%= link_to "Another action", "#", class: "dropdown-item" %>
-              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
+              <a class="dropdown-item" href="<%= requests_path %>">Requests</a>
+              <a class="dropdown-item" href="<%= new_request_path %>">New Request</a>
+              <%= link_to "Log out", destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class: "dropdown-item" %>
             </div>
           </li>
         <% else %>
