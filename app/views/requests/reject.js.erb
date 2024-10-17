@@ -1,0 +1,6 @@
+<% if flash[:notice] %>
+  alert("<%= j flash[:notice] %>");
+  location.reload();
+<% elsif flash[:alert] %>
+  alert("<%= j flash[:alert] %>");
+<% end %>

@@ -26,7 +26,7 @@ Rails.application.routes.draw do
     end
   end
 
- resources :requests do
+  resources :requests do
     member do
       patch 'approve'
       patch 'reject'

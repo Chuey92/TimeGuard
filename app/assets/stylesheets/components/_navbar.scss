@@ -10,3 +10,12 @@
 .navbar-lewagon .navbar-brand img {
   width: 40px;
 }
+
+.dropdown-menu {
+  display: block !important; /* Temporarily force it to show for testing */
+}
+
+.navbar-lewagon .dropdown-menu {
+  right: 0;
+  left: auto;
+}

@@ -1,0 +1,34 @@
+<!-- app/views/requests/new.html.erb -->
+
+<h1>New Request</h1>
+
+<%= form_with(model: @request, local: true) do |form| %>
+  <div class="mb-3">
+    <%= form.label :request_type, "Request Type", class: "form-label" %>
+    <%= form.select :request_type, options_for_select(['time_off', 'shift_swap'], @request.request_type), { prompt: "Select Request Type" }, class: "form-select", required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :shift_id, "Shift", class: "form-label" %>
+    <%= form.collection_select :shift_id, current_user.shifts, :id, :shift_time, { prompt: "Select Shift" }, class: "form-select", required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :schedule_id, "Schedule", class: "form-label" %>
+    <%= form.collection_select :schedule_id, current_user.schedules, :id, :date, { prompt: "Select Schedule" }, class: "form-select", required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :date_of_request, "Date of Request", class: "form-label" %>
+    <%= form.date_field :date_of_request, class: "form-control", required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :comment, "Comment", class: "form-label" %>
+    <%= form.text_area :comment, class: "form-control", rows: 3, required: true %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Create Request", class: "btn btn-primary" %>
+  </div>
+<% end %>

@@ -1,22 +1,10 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
-
-
-# Destroy all existing records to prevent duplicates
 Request.destroy_all
 Shift.destroy_all
 Schedule.destroy_all
 Site.destroy_all
 User.destroy_all
 
-# Define manager users with necessary fields and validations
+# Create manager users
 manager_users = [
   {
     name: "John Doe",
@@ -46,15 +34,10 @@ manager_users = [
 
 # Create the manager users
 manager_users.each do |user_data|
-  begin
-    User.create!(user_data)
-    puts "Manager user #{user_data[:name]} created successfully."
-  rescue ActiveRecord::RecordInvalid => e
-    puts "Failed to create manager user #{user_data[:name]}: #{e.message}"
-  end
+  User.create!(user_data)
 end
 
-# Define non-manager users with necessary fields and validations
+# Create non-manager users
 non_manager_users = [
   {
     name: "Alice Brown",

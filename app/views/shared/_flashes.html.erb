@@ -1,14 +1,19 @@
-<% if notice %>
-  <div class="alert alert-info alert-dismissible fade show m-1" role="alert">
-    <%= notice %>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-    </button>
-  </div>
-<% end %>
-<% if alert %>
-  <div class="alert alert-warning alert-dismissible fade show m-1" role="alert">
-    <%= alert %>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-    </button>
+<!-- app/views/shared/_flashes.html.erb -->
+
+<% flash.each do |key, message| %>
+  <% alert_class = case key.to_sym
+                 when :notice
+                   "alert-success"
+                 when :alert, :error
+                   "alert-danger"
+                 when :info
+                   "alert-info"
+                 else
+                   "alert-secondary"
+                 end %>
+
+  <div class="alert <%= alert_class %> alert-dismissible fade show m-1" role="alert">
+    <%= message %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
 <% end %>
