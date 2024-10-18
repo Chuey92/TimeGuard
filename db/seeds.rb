@@ -48,6 +48,7 @@ sites = Site.create!([
   { name: "London Tech Hub", address: "456 Oxford St, London", user: manager_user2, latitude: 51.514568, longitude: -0.135611 },
   { name: "London Office Space", address: "789 Regent St, London", user: manager_user3, latitude: 51.5125346, longitude: -0.140195 }
 ])
+
 # Check if latitude & longitude for sites are correct. Remove this part if not needed.
 sites.each do |site|
   if site.latitude.nil? || site.longitude.nil?
@@ -55,7 +56,7 @@ sites.each do |site|
     site.update(latitude: coordinates[0], longitude: coordinates[1]) if coordinates.present?
   end
 end
-# Create schedules for non-manager users
+
 schedules = Schedule.create!([
   { user: non_manager_user1, date: Date.today, site: sites[0] },
   { user: non_manager_user2, date: Date.today + 1.week, site: sites[1] },
