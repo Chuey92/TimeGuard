@@ -9,4 +9,24 @@ class SitesController < ApplicationController
       }
     end
   end
+
+  def new
+    @site = Site.new
+  end
+
+  def create
+    @site = Site.new(site_params)
+    @site.user = current_user
+    if @site.save
+      redirect_to sites_path, notice: "New site created!"
+    else
+      render :new
+    end
+  end
+
+  private
+
+  def site_params
+    params.require(:site).permit(:name, :address)
+  end
 end

@@ -1,2 +1,78 @@
-<h1>All Schedules</h1>
-<%= render partial: "shared/schedule_card", collection: @schedules %>
+<div class="page-container">
+  <h1>Work Schedule</h1>
+
+  <!-- Calendar structure -->
+  <div class="calendar-container">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <% Date::DAYNAMES.each do |day| %>
+            <th><%= day %></th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <% Date.today.all_week.each do |date| %>
+            <td>
+              <h5><%= date.strftime("%B %d, %Y") %></h5>
+              <% @schedules.each do |schedule| %>
+                <% if schedule.date == date %>
+                  <% schedule.shifts.each do |shift| %>
+                    <div class="shift-block">
+                      <p><strong>Employee:</strong> <%= shift.user.name %></p>
+                      <p><strong>Time:</strong> <%= shift.shift_time.strftime("%I:%M %p") %></p>
+                      <p><strong>Site:</strong> <%= shift.schedule.site.name %></p>
+                      <% if current_user.manager? %>
+                        <%= link_to "Edit Shift", edit_shift_path(shift), class: "btn btn-secondary" %>
+                        <!-- Button to trigger modal for creating or editing shifts -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#shiftModal">
+                          Create/Edit Shift
+                        </button>
+                      <% end %>
+                    </div>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </td>
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal for creating/editing shifts -->
+  <div class="modal fade" id="shiftModal" tabindex="-1" aria-labelledby="shiftModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="shiftModalLabel">Create/Edit Shift</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <%= form_with model: @shift, local: true do |f| %>
+            <div class="field">
+              <%= f.label :shift_date %>
+              <%= f.date_field :shift_date %>
+            </div>
+            <div class="field">
+              <%= f.label :shift_time %>
+              <%= f.time_field :shift_time %>
+            </div>
+            <div class="field">
+              <%= f.label :user_id, "Assign to Employee" %>
+              <%= f.collection_select :user_id, User.all, :id, :name, prompt: "Select Employee" %>
+            </div>
+            <div class="field">
+              <%= f.label :schedule_id, "Assign to Schedule" %>
+              <%= f.collection_select :schedule_id, Schedule.all, :id, :date, prompt: "Select Schedule" %>
+            </div>
+            <div class="actions">
+              <%= f.submit %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

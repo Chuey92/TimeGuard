@@ -55,7 +55,6 @@ sites.each do |site|
     site.update(latitude: coordinates[0], longitude: coordinates[1]) if coordinates.present?
   end
 end
-# Create schedules for non-manager users
 schedules = Schedule.create!([
   { user: non_manager_user1, date: Date.today, site: sites[0] },
   { user: non_manager_user2, date: Date.today + 1.week, site: sites[1] },
