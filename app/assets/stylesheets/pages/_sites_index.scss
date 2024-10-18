@@ -25,6 +25,8 @@ body {
   justify-content: space-between;
   padding: 8px;
   margin: 0;
+  background-color: #bdc2e8;
+  width: 100hw;
 }
 
 .map {
@@ -44,5 +46,5 @@ body {
 }
 
 .list-group-item a:hover {
-  color: #007bff;
+  background-color: #7128d8;
 }
