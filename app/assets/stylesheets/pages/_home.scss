@@ -12,6 +12,15 @@
   }
 }
 
+.body-landing {
+  // background effect
+  background: linear-gradient(-225deg, #adeae9, #C5C1FF, #FFBAC3);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  width: 100vw;
+  height: 100vh;
+}
+
 .container-landing {
   height: 80vh;
   display: flex;
@@ -20,10 +29,7 @@
   margin-top:0px;
   padding:0;
 
-  // background effect
-  background: linear-gradient(-225deg, #adeae9, #C5C1FF, #FFBAC3);
-  background-size: 400% 400%;
-  animation: gradientBG 15s ease infinite;
+  
 
 }
 
