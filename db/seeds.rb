@@ -64,7 +64,7 @@ schedules = Schedule.create!([
 shifts = Shift.create!([
   { user: non_manager_user1, schedule: schedules[0], shift_date: Date.today, shift_time: "09:00", clocked_in: true },
   { user: non_manager_user2, schedule: schedules[1], shift_date: Date.today + 1.week, shift_time: "10:00", clocked_in: false },
-  { user: non_manager_user1, schedule: schedules[2], shift_date: Date.today + 2.weeks, shift_time: "11:00", clocked_in: true }
+  { user: non_manager_user1, schedule: schedules[2], shift_date: Date.today + 2.weeks, shift_time: "11:00", clocked_in: false }
 ])
 # Create requests linked to users, shifts, and schedules
 requests = Request.create!([
