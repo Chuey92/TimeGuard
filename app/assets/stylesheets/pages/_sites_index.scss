@@ -2,7 +2,6 @@
 body {
   color:rgba(0,0,0,0.65);
   background-color: white;
-
 }
 
 
@@ -10,11 +9,10 @@ body {
   width:25%;
   background-image: linear-gradient(to top, #bdc2e8 0%, #bdc2e8 1%, #e6dee9 100%);
   border-radius: 5px;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   padding: 0;
-  margin:8px;
+
 }
 
 .menu-bar-title {
@@ -22,13 +20,29 @@ body {
   text-align: center;
 }
 
-.container {
+.container-dashboard {
   display:flex;
   justify-content: space-between;
   padding: 8px;
+  margin: 0;
 }
 
-.mapboxgl-canvas {
-  margin-top: 8px;
+.map {
+  justify-content: end;
+  border-radius: 5px;
+  margin-top: 70px;
+}
 
+.list-group-item {
+  padding: 10px;
+  font-size: 16px;
+}
+
+.list-group-item a {
+  text-decoration: none;
+  color: #000;
+}
+
+.list-group-item a:hover {
+  color: #007bff;
 }
