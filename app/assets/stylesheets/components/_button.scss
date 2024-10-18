@@ -16,4 +16,43 @@ color: #fff;
 .btn:hover {
 opacity: 0.9;
 }
-  
+
+
+
+.purple-border-button {
+  background-color: white;
+  color: #7128D8;
+  border: 1px solid #7128D8;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+}
+
+.purple-border-button:hover {
+  background-color: rgb(216, 213, 213);
+}
+
+
+
+.purple-button {
+  background-color: #7128D8;
+  color: white;
+  border: 1px solid #7128D8;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+}
+
+.purple-button:hover {
+  background-color: #3700B3;
+}

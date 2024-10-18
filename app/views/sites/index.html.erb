@@ -1,19 +1,21 @@
-<body>
-<div class='container flex mt-3'>
+<div class='container-dashboard flex mt-3'>
 
 
   <div class="menu-bar">
     <div class="menu-bar-body">
       <h5 class="menu-bar-title">Menu</h5>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item"><a href="#" class="text-decoration-none">Button 1</a></li>
-        <li class="list-group-item"><a href="#" class="text-decoration-none">Button 2</a></li>
-        <li class="list-group-item"><a href="#" class="text-decoration-none">Button 3</a></li>
+
+        <li class="list-group-item"><%= link_to "Requests", requests_path %></li>
+        <li class="list-group-item"><%= link_to "Shifts", shifts_path %></li>
+        <li class="list-group-item"><%= link_to "Schedules", schedules_path %></li>
+
+
       </ul>
     </div>
   </div>
 
-  <div style="width: 70%; height: 450px;"
+  <div class="map" style="width: 70%; height: 450px;"
     data-controller="map"
     data-map-markers-value="<%= @markers.to_json %>"
     data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
@@ -22,5 +24,3 @@
 
 
 </div>
-
-</body>
