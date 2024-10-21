@@ -17,6 +17,9 @@ Rails.application.routes.draw do
   resources :sites
 
   resources :schedules do
+    collection do
+      post :update_event
+    end
     resources :shifts
   end
 
