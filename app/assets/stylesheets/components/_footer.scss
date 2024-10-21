@@ -1,9 +1,25 @@
+html, body {
+  height: 100%; /* Full height for HTML and body */
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Minimum height to ensure full viewport height */
+}
+
+.container {
+  flex: 1; /* This makes the container grow and push the footer to the bottom */
+}
+
 .footer {
   background-color: #fff;
   padding: 40px 0;
   color: #333;
   font-family: 'Poppins', sans-serif;
   border-top: 1px solid #e0e0e0;
+  margin-top: auto; /* Key: Push the footer to the bottom */
 }
 
 .container-footer {
@@ -25,8 +41,7 @@
   font-weight: 600;
 }
 
-.footer-section p,
-.footer-section ul li {
+.footer-section p, .footer-section ul li {
   margin-bottom: 10px;
   color: #707070;
 }
