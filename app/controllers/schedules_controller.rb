@@ -24,4 +24,8 @@ class SchedulesController < ApplicationController
   def update_shift(event)
     event.update(shift_date: params[:start], end_time: params[:end]) # Adjust these fields as necessary
   end
+
+  def index
+    @schedules = Schedule.includes(:shifts) # Ensure you load the schedules with associated shifts
+  end
 end

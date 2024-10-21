@@ -1,3 +1,22 @@
+<div class='container-dashboard flex mt-3'>
+
+
+  <div class="menu-bar">
+    <div class="menu-bar-body">
+      <h5 class="menu-bar-title">Menu</h5>
+      <ul class="list-group list-group-flush">
+
+        <li class="list-group-item"><%= link_to "Dashboard", sites_path %></li>
+        <li class="list-group-item"><%= link_to "See All Requests", requests_path %></li>
+        <li class="list-group-item"><%= link_to "Shifts", shifts_path %></li>
+        <li class="list-group-item"><%= link_to "Schedules", schedules_path %></li>
+        <li class="list-group-item"><%= link_to "Add a new site", new_site_path %></li>
+
+
+      </ul>
+    </div>
+  </div>
+
 <div class="page-container">
   <h1>Your Shifts</h1>
 
@@ -19,4 +38,5 @@
       </div>
     <% end %>
   </div>
+</div>
 </div>
