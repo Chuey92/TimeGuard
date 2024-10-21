@@ -17,6 +17,35 @@
     </div>
   </div>
 
+  <%= link_to requests_path do %>
+  <div class='dash-top-left'>
+    <ul>
+      <li>You have</li>
+      <li><%= Request.where(request_status:nil).count %></li>
+      <li>unsolved request<%= Request.where(request_status: nil).count == 1 ? '' : 's'%></li>
+    </ul>
+  </div>
+  <% end %>
+
+
+  <div class='dash-top-middle'>
+    <ul>
+      <% if @next_shift %>
+        <li>Next shift starts at</li>
+        <li><%= @next_shift.start_time.strftime("%H:%M") %></li>
+        <li><%= @next_shift.site %></li>
+        <li>On duty: <%= @next_shift.user.name %>
+      <% else %>
+        <li>No upcoming shifts.</li>
+      <% end %>
+    </ul>
+
+
+
+  </div>
+
+
+
 
 
   <div class="map" style="width: 70%; height: 450px;"

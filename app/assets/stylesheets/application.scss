@@ -19,3 +19,25 @@
 .page-container {
     padding: 20px
 }
+
+html body {
+  height: 100%;
+  margin: 0;
+}
+
+.container-body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.application-body-yield {
+  height: 100vh;
+  padding: 20px;
+}
+.application-body-footer {
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  width: 100%;
+}
