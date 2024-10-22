@@ -1,22 +1,11 @@
 /* app/assets/stylesheets/sites.css */
-body {
-  color:rgba(0,0,0,0.65);
-  min-height: 100vh;
-  background-color: white;
-  transition:  all 0.3s ease;
-}
 
-.container-dashboard {
-  display:flex;
-  justify-content: space-between;
-  padding: 8px;
-  margin: 20px;
-  padding: 20px;
-  border-radius: 5px;
-  background-color: #E4E9F7;
-  width: 100hw;
-  height: auto;
-}
+
+
+
+
+
+
 
 .menu-bar {
   // background-image: linear-gradient(to top, #bdc2e8 0%, #bdc2e8 1%, #e6dee9 100%);
@@ -40,11 +29,7 @@ body {
 
 
 
-.map {
-  justify-content: end;
-  border-radius: 5px;
-  margin-top: 70px;
-}
+
 
 .list-group-item {
   padding: 15px 0 15px 0;

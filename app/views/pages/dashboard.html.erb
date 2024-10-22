@@ -1,0 +1,87 @@
+<div class='container-dashboard flex'>
+
+  <!-- left-side menu -->
+  <div class="menu-bar card">
+    <div class="menu-bar-body">
+      <h5 class="menu-bar-title">Menu</h5>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><%= link_to "Dashboard", dashboard_path %></li>
+        <li class="list-group-item"><%= link_to "See All Requests", requests_path %></li>
+        <li class="list-group-item"><%= link_to "Shifts", shifts_path %></li>
+        <li class="list-group-item"><%= link_to "Schedules", schedules_path %></li>
+        <li class="list-group-item"><%= link_to "Add a new site", new_site_path %></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- main dashboard content -->
+  <div class='dashboard-content'>
+
+    <!-- TOP section: unsolved requests, todo list and clock -->
+    <div class="dash-top flex">
+      <!-- unsolved requests -->
+
+        <div class='dash-top-left card-dash'>
+          <%= link_to requests_path, class: 'card-link' do %>
+            <div class="card-content">
+              <p>You have</p>
+              <h2><%= Request.where(request_status: nil).count %></h2>
+              <p>unsolved request<%= Request.where(request_status: nil).count == 1 ? '' : 's'%></p>
+            </div>
+          <% end %>
+        </div>
+
+
+      <!-- todo list -->
+      <div class='dash-top-middle card-dash'>
+        <h2>To-Do List</h2>
+        <input type="text" id="todo-input" placeholder="Add a new task">
+        <button id="add-btn">Add</button>
+        <ul id="todo-list"></ul>
+      </div>
+
+
+      <!-- current time & next shift -->
+      <div class='dash-top-right'>
+        <!-- clock -->
+        <div class="dash-clock card-dash" data-controller="dashboard">
+          <h4><div id="clock"></div></h4>
+        </div>
+        <!-- shift -->
+        <div class='dash-next-shift card-dash'>
+          <ul>
+            <% if @next_shift %>
+              <li>Next shift starts at</li>
+              <li><%= @next_shift.shift_time.strftime("%H:%M") %></li>
+              <li><%= @next_shift.schedule.site.name %></li>
+              <li>On duty: <%= @next_shift.user.name %>
+            <% else %>
+              <li>No upcoming shifts.</li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Bottom : Calendar and Map -->
+    <div class='dash-bottom flex'>
+      <!-- Google calendar -->
+      <div class='dash-bottom-left card-dash'>
+        <iframe src="https://calendar.google.com/calendar/embed?src=your_calendar_id&ctz=Europe/London"
+                style="border: 0" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
+      </div>
+
+
+      <!-- Map -->
+      <div class='dash-bottom-right card-dash'>
+        <div class="map" style="width: 100%; height: 350px;"
+          data-controller="map"
+          data-map-markers-value="<%= @markers.to_json %>"
+          data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

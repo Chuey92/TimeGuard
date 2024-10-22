@@ -19,12 +19,21 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-  <body>
-  <% unless current_page?(root_path) %>
-    <%= render "shared/navbar" %>
-  <% end %>
-    <%= render "shared/flashes" %>
-      <%= yield %>
-      <%= render "shared/footer"%>
-  </body>
+
+
+    <body>
+  
+      <% unless current_page?(root_path) %>
+       <%= render "shared/navbar" %>
+      <% end %>
+      <%= render "shared/flashes" %>
+
+
+      <div class="container-body">
+        <div class='application-body-yield'><%= yield %></div>
+        <div class='application-body-footer'><%= render "shared/footer"%></div>
+      </div>
+
+    </body>
+
 </html>

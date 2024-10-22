@@ -6,7 +6,7 @@
       <h5 class="menu-bar-title">Menu</h5>
       <ul class="list-group list-group-flush">
 
-        <li class="list-group-item"><%= link_to "Dashboard", sites_path %></li>
+        <li class="list-group-item"><%= link_to "Dashboard", dashboard_path %></li>
         <li class="list-group-item"><%= link_to "See All Requests", requests_path %></li>
         <li class="list-group-item"><%= link_to "Shifts", shifts_path %></li>
         <li class="list-group-item"><%= link_to "Schedules", schedules_path %></li>
@@ -16,6 +16,8 @@
       </ul>
     </div>
   </div>
+
+
 
   <div class="map" style="width: 70%; height: 450px;"
     data-controller="map"
