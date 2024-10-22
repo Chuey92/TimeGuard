@@ -8,7 +8,7 @@
 
     <div class="btns-landing">
     <% if user_signed_in? %>
-      <%= link_to "View Dashboard", shifts_path, class: "purple-button"  %>
+      <%= link_to "View Dashboard", dashboard_path, class: "purple-button"  %>
     <% else %>
       <%= button_to "Sign up", new_user_registration_path, class: "purple-button"  %>
       <%= button_to "Sign In", new_user_session_path, class:"purple-border-button" %>
