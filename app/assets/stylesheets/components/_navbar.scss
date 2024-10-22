@@ -7,6 +7,7 @@
   background: white;
 }
 
+
 .navbar-lewagon .navbar-collapse {
   flex-grow: 1; /* Allow collapse to expand */
 }
@@ -23,6 +24,12 @@
 .navbar-lewagon .navbar-nav .nav-link:hover {
   color: #ffcc00; /* Highlight color on hover */
   text-decoration: underline;
+}
+
+.navbar-lewagon .dropdown-menu {
+  right: 0;
+  left: auto;
+
 }
 
 .navbar-lewagon .dropdown-menu {
