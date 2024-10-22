@@ -1,43 +1,34 @@
 <div class='container-dashboard flex mt-3'>
+  <div class='sidebar'>
+      <% unless current_page?(root_path) %>
+       <%= render "shared/sidebar" %>
+      <% end %>
+  </div>
 
 
-  <div class="menu-bar">
-    <div class="menu-bar-body">
-      <h5 class="menu-bar-title">Menu</h5>
-      <ul class="list-group list-group-flush">
-
-        <li class="list-group-item"><%= link_to "Dashboard", sites_path %></li>
-        <li class="list-group-item"><%= link_to "See All Requests", requests_path %></li>
-        <li class="list-group-item"><%= link_to "Shifts", shifts_path %></li>
-        <li class="list-group-item"><%= link_to "Schedules", schedules_path %></li>
-        <li class="list-group-item"><%= link_to "Add a new site", new_site_path %></li>
 
 
-      </ul>
+  <div class="page-container">
+    <h1>Your Shifts</h1>
+
+    <div class="card-container">
+      <% @shifts.each do |shift| %>
+        <div class="card">
+          <h2><%= shift.user.name %></h2>
+          <p><strong>Shift Date:</strong> <%= shift.shift_date.strftime("%B %d, %Y") %></p>
+          <p><strong>Shift Time:</strong> <%= shift.shift_time.strftime("%I:%M %p") %></p>
+          <p><strong>Site:</strong> <%= shift.schedule.site.name %> (<%= shift.schedule.site.address %>)</p>
+          <p><strong>Clocked In:</strong> <%= shift.clocked_in ? "Yes" : "No" %></p>
+          <p>
+            <%= link_to "View Shift", shift_path(shift), class: "btn btn-primary" %>
+            <% if current_user.manager? %>
+              <%= link_to "Edit Shift", edit_shift_path(shift), class: "btn btn-secondary" %>
+              <%= link_to "Delete Shift", shift_path(shift), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+              <%= button_to "Clock In", clock_ins_path(shift_id: shift.id), method: :post, class: "btn btn-primary" %>
+            <% end %>
+          </p>
+        </div>
+      <% end %>
     </div>
   </div>
-
-<div class="page-container">
-  <h1>Your Shifts</h1>
-
-  <div class="card-container">
-    <% @shifts.each do |shift| %>
-      <div class="card">
-        <h2><%= shift.user.name %></h2>
-        <p><strong>Shift Date:</strong> <%= shift.shift_date.strftime("%B %d, %Y") %></p>
-        <p><strong>Shift Time:</strong> <%= shift.shift_time.strftime("%I:%M %p") %></p>
-        <p><strong>Site:</strong> <%= shift.schedule.site.name %> (<%= shift.schedule.site.address %>)</p>
-        <p><strong>Clocked In:</strong> <%= shift.clocked_in ? "Yes" : "No" %></p>
-        <p>
-          <%= link_to "View Shift", shift_path(shift), class: "btn btn-primary" %>
-          <% if current_user.manager? %>
-            <%= link_to "Edit Shift", edit_shift_path(shift), class: "btn btn-secondary" %>
-            <%= link_to "Delete Shift", shift_path(shift), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
-            <%= button_to "Clock In", clock_ins_path(shift_id: shift.id), method: :post, class: "btn btn-primary" %>
-          <% end %>
-        </p>
-      </div>
-    <% end %>
-  </div>
-</div>
 </div>

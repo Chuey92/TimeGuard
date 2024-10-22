@@ -9,6 +9,9 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <!-- Left-aligned links (Home, Sites, etc.) -->
+
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <% if user_signed_in? %>
           <li class="nav-item active">
@@ -16,7 +19,9 @@
           </li>
           <% if current_user.manager? %>
             <li class="nav-item">
-              <%= link_to "Dashboard", sites_path, class: "nav-link" %>
+
+              <%= link_to "Dashboard", dashboard_path, class: "nav-link" %>
+
             </li>
             <li class="nav-item">
               <%= link_to "Shifts", shifts_path, class: "nav-link" %>
@@ -45,8 +50,9 @@
       <ul class="navbar-nav ms-auto">
         <% if user_signed_in? %>
           <li class="nav-item dropdown">
-            <a href="#" class="account-icon fa-solid fa-user" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            </a>
+
+          <a class="fa-solid fa-user" href="#" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="<%= requests_path %>">Requests</a>
               <a class="dropdown-item" href="<%= new_request_path %>">New Request</a>
@@ -61,4 +67,5 @@
       </ul>
     </div>
   </div>
+
 </div>

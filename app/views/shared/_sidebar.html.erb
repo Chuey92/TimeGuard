@@ -1,0 +1,77 @@
+<div data-controller="sidebar" data-sidebar-target="sidebar" class="sidebar navbar-lewagon" id="sidebar">
+  <div class="sidebar-toggle">
+    <button class="btn btn-toggle fa-solid fa-minus" data-action="sidebar#toggle" data-sidebar-target="toggle" id="toggleSidebar" aria-label="Toggle Sidebar"></button>
+  </div>
+
+  <div class="sidebar-header">
+    <%= link_to root_path, class: "sidebar-brand" do %>
+      <%= image_tag "logo.png", class: "logo" %>
+    <% end %>
+  </div>
+
+  <ul class="sidebar-nav" id="sidebarNav">
+    <% if user_signed_in? %>
+      <li class="nav-item">
+        <%= link_to root_path, class: "nav-link" do %>
+          <i class="fas fa-home"></i> <span>Home</span>
+
+        <% end %>
+      </li>
+      <% if current_user.manager? %>
+        <li class="nav-item">
+          <%= link_to dashboard_path, class: "nav-link" do %>
+            <i class="fas fa-chart-line"></i> <span>Dashboard</span>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to shifts_path, class: "nav-link" do %>
+            <i class="fas fa-clock"></i> <span>Shifts</span>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to schedules_path, class: "nav-link" do %>
+            <i class="fas fa-calendar-alt"></i> <span>Schedule</span>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to requests_path, class: "nav-link" do %>
+            <i class="fas fa-envelope"></i> <span>Requests</span>
+          <% end %>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <%= link_to dashboard_path, class: "nav-link" do %>
+            <i class="fas fa-map-marker-alt"></i> <span>Sites</span>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to shifts_path, class: "nav-link" do %>
+            <i class="fas fa-clock"></i> <span>Shifts</span>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to clock_in_page_path, class: "nav-link" do %>
+            <i class="fas fa-clock"></i> <span>Clock In</span>
+          <% end %>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+
+  <ul class="sidebar-nav user-avatar mt-auto">
+    <% if user_signed_in? %>
+      <li class="nav-item dropdown">
+        <a href="#" class="nav-link avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa-solid fa-user"></i> <span>Account</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="Dropdown">
+        <!--
+          <a class="dropdown-item" href="<%= requests_path %>">Requests</a>
+          <a class="dropdown-item" href="<%= new_request_path %>">New Request</a>
+          -->
+          <%= link_to "Log out", destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class: "dropdown-item" %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+</div>

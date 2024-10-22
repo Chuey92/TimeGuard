@@ -18,6 +18,38 @@
 @import "calendar";
 
 
+
+
+body {
+  color:rgba(0,0,0,0.65);
+  min-height: 100vh;
+  background-color: white;
+  transition:  all 0.3s ease;
+}
+
+
+html body {
+  height: 100%;
+  margin: 0;
+}
+
+.container-body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.application-body-yield {
+  height: 100vh;
+
+}
+.application-body-footer {
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  width: 100%;
+}
+
 .page-container {
     padding: 20px;
 }
