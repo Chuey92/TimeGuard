@@ -11,14 +11,23 @@
       </ul>
     </div>
   </div>
-  <h1>Clock In</h1>
+  
 
 <% if @upcoming_shift %>
-  <p>Your next upcoming shift is <%= @upcoming_shift.shift_date %> at <%= @upcoming_shift.schedule.site.name %>.</p>
-  <p>Would you like to clock in to this shift?</p>
+<div class="page-container">
+<h1>Clock In</h1>
+<div class="card-container">
+      <div class="card">
+        <p>Your next upcoming shift is <%= @upcoming_shift.shift_date %> at <%= @upcoming_shift.schedule.site.name %>.</p>
+        <p>Would you like to clock in to this shift?</p>
+        <%= button_to "Clock In", clock_ins_path(shift_id: @upcoming_shift.id), method: :post, class: "mt-2 btn btn-primary" %>
+      </div>
+  
 
-  <%= button_to "Clock In", clock_ins_path(shift_id: @upcoming_shift.id), method: :post, class: "btn btn-primary" %>
+  
+  </div>
 <% else %>
   <p>You do not have an assigned shift right now. Your next shift is on <%= current_user.shifts.order(:shift_date).first&.shift_date %>.</p>
 <% end %>
+</div>
 </div>
