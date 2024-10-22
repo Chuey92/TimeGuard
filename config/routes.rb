@@ -12,9 +12,11 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   # Defines the root path route ("/")
+  get 'clock_in', to: 'clock_ins#new', as: 'clock_in_page'
   # root "posts#index"
 
   resources :sites
+  resources :clock_ins, only: [:create]
 
   resources :schedules do
     collection do
@@ -25,7 +27,7 @@ Rails.application.routes.draw do
 
   resources :shifts do
     member do
-      post "clock_in"
+      post 'clock_in'
     end
   end
 

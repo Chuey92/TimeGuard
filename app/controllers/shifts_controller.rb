@@ -35,7 +35,6 @@ class ShiftsController < ApplicationController
   end
 
   def edit
-    @shift = Shift.find(params[:id])
     authorize @shift
   end
 
@@ -47,12 +46,24 @@ class ShiftsController < ApplicationController
 
   def clock_in
     authorize @shift
-    # Check if user's location matches the site's location
-    if location_matches_site?
+
+    # Get current latitude and longitude from the user's geolocation
+    user_lat = params[:latitude].to_f
+    user_lon = params[:longitude].to_f
+
+    # Retrieve the site location linked to the shift's schedule
+    site = @shift.schedule.site
+    site_lat = site.latitude
+    site_lon = site.longitude
+
+    # Check if user's current location matches site location within a reasonable distance (e.g., 0.5 km)
+    distance = Geocoder::Calculations.distance_between([user_lat, user_lon], [site_lat, site_lon])
+
+    if distance <= 0.5
       @shift.update(clocked_in: true)
-      redirect_to @shift, notice: "Clocked in successfully."
+      render json: { success: true, message: "Clocked in successfully!" }
     else
-      redirect_to @shift, alert: "You must be at the site to clock in."
+      render json: { success: false, message: "You are not at the correct site to clock in." }
     end
   end
 
@@ -64,9 +75,5 @@ class ShiftsController < ApplicationController
 
   def shift_params
     params.require(:shift).permit(:user_id, :schedule_id, :shift_date, :shift_time, :clocked_in, :start_time, :end_time)
-  end
-
-  def location_matches_site?
-    # Logic to check if user location matches site
   end
 end
