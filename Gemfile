@@ -46,6 +46,7 @@ gem "ransack"
 
 gem "pundit"
 gem "geocoder"
+gem 'simple_calendar'
 
 group :development, :test do
   gem "dotenv-rails"

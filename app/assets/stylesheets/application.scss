@@ -16,9 +16,13 @@
 @import url("https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css");
 
 
-.page-container {
-    padding: 20px
+body {
+  color:rgba(0,0,0,0.65);
+  min-height: 100vh;
+  background-color: white;
+  transition:  all 0.3s ease;
 }
+
 
 html body {
   height: 100%;
@@ -28,12 +32,12 @@ html body {
 .container-body {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 100%;
 }
 
 .application-body-yield {
   height: 100vh;
-  padding: 20px;
+
 }
 .application-body-footer {
   color: white;

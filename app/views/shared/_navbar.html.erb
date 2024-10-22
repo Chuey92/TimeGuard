@@ -17,7 +17,7 @@
           </li>
           <% if current_user.manager? %>
             <li class="nav-item">
-              <%= link_to "Dashboard", sites_path, class: "nav-link" %>
+              <%= link_to "Dashboard", dashboard_path, class: "nav-link" %>
             </li>
             <li class="nav-item">
               <%= link_to "Shifts", shifts_path, class: "nav-link" %>
