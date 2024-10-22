@@ -7,9 +7,13 @@
       With real-time tracking, you can easily ensure that your team is always in the right place at the right time.</p>
 
     <div class="btns-landing">
+    <% if user_signed_in? %>
+      <%= link_to "View Dashboard", shifts_path, class: "purple-button"  %>
+    <% else %>
       <%= button_to "Sign up", new_user_registration_path, class: "purple-button"  %>
       <%= button_to "Sign In", new_user_session_path, class:"purple-border-button" %>
-      </div>
+    <% end %>
+    </div>
   </div>
   <div class="img-landing">
     <%= image_tag "landing_page.jpg"%>
