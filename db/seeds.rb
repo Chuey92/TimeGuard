@@ -45,10 +45,9 @@ non_manager_user2 = User.find_by(email: "bob@example.com")
 # Create sites, link them to managers
 sites = Site.create!([
   { name: "London Headquarters", address: "123 Baker St, London", user: manager_user1, latitude: 51.5216549, longitude: -0.1574937 },
-  { name: "London Tech Hub", address: "456 Oxford St, London", user: manager_user2, latitude: 51.514568, longitude: -0.135611 },
+  { name: "London Tech Hub", address: "456 Oxford St, London", user: manager_user2, latitude: 51.5163908, longitude: -0.1304228 },
   { name: "London Office Space", address: "789 Regent St, London", user: manager_user3, latitude: 51.5125346, longitude: -0.140195 }
 ])
-
 # Check if latitude & longitude for sites are correct. Remove this part if not needed.
 sites.each do |site|
   if site.latitude.nil? || site.longitude.nil?
@@ -56,7 +55,7 @@ sites.each do |site|
     site.update(latitude: coordinates[0], longitude: coordinates[1]) if coordinates.present?
   end
 end
-
+# Create schedules for non-manager users
 schedules = Schedule.create!([
   { user: non_manager_user1, date: Date.today, site: sites[0] },
   { user: non_manager_user2, date: Date.today + 1.week, site: sites[1] },
@@ -66,7 +65,7 @@ schedules = Schedule.create!([
 shifts = Shift.create!([
   { user: non_manager_user1, schedule: schedules[0], shift_date: Date.today, shift_time: "09:00", clocked_in: true },
   { user: non_manager_user2, schedule: schedules[1], shift_date: Date.today + 1.week, shift_time: "10:00", clocked_in: false },
-  { user: non_manager_user1, schedule: schedules[2], shift_date: Date.today + 2.weeks, shift_time: "11:00", clocked_in: true }
+  { user: non_manager_user1, schedule: schedules[2], shift_date: Date.today + 2.weeks, shift_time: "11:00", clocked_in: false }
 ])
 # Create requests linked to users, shifts, and schedules
 requests = Request.create!([

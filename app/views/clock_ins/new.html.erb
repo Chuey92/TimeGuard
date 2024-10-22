@@ -1,0 +1,24 @@
+<div class='container-dashboard flex mt-3'>
+  <div class="menu-bar">
+    <div class="menu-bar-body">
+      <h5 class="menu-bar-title">Menu</h5>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><%= link_to "Dashboard", sites_path %></li>
+        <li class="list-group-item"><%= link_to "See All Requests", requests_path %></li>
+        <li class="list-group-item"><%= link_to "Shifts", shifts_path %></li>
+        <li class="list-group-item"><%= link_to "Schedules", schedules_path %></li>
+        <li class="list-group-item"><%= link_to "Add a new site", new_site_path %></li>
+      </ul>
+    </div>
+  </div>
+  <h1>Clock In</h1>
+
+<% if @upcoming_shift %>
+  <p>Your next upcoming shift is <%= @upcoming_shift.shift_date %> at <%= @upcoming_shift.schedule.site.name %>.</p>
+  <p>Would you like to clock in to this shift?</p>
+
+  <%= button_to "Clock In", clock_ins_path(shift_id: @upcoming_shift.id), method: :post, class: "btn btn-primary" %>
+<% else %>
+  <p>You do not have an assigned shift right now. Your next shift is on <%= current_user.shifts.order(:shift_date).first&.shift_date %>.</p>
+<% end %>
+</div>
