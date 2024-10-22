@@ -1,116 +1,138 @@
 <!-- app/views/requests/index.html.erb -->
 
-<h1><%= current_user.manager? ? "All Requests" : "My Requests" %></h1>
+<div class='container-dashboard flex mt-3'>
+  <div class="menu-bar">
+    <div class="menu-bar-body">
+      <h5 class="menu-bar-title">Menu</h5>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><%= link_to "Dashboard", sites_path %></li>
+        <li class="list-group-item"><%= link_to "See All Requests", requests_path %></li>
+        <li class="list-group-item"><%= link_to "Shifts", shifts_path %></li>
+        <li class="list-group-item"><%= link_to "Schedules", schedules_path %></li>
+        <li class="list-group-item"><%= link_to "Add a new site", new_site_path %></li>
+      </ul>
+    </div>
+  </div>
 
-<%= turbo_stream_from "requests" %>
+  <div class="page-container">
+    <h1><%= current_user.manager? ? "All Requests" : "My Requests" %></h1>
 
-<% if @requests.any? %>
-  <table class="table table-hover table-striped">
-    <thead class="table-dark">
-      <tr>
-        <th>Request Type</th>
-        <% if current_user.manager? %>
-          <th>Requester</th>
-        <% end %>
-        <th>Shift ID</th>
-        <th>Schedule ID</th>
-        <th>Date of Request</th>
-        <th>Status</th>
-        <th>Manager Comment</th>
-        <% if current_user.manager? %>
-          <th>Actions</th>
-        <% end %>
-      </tr>
-    </thead>
-    <tbody>
-      <% @requests.each do |request| %>
-        <tr>
-          <td><%= request.request_type.capitalize %></td>
-          <% if current_user.manager? %>
-            <td><%= request.user.name %> (ID: <%= request.user.id %>)</td>
-          <% end %>
-          <td><%= request.shift_id %></td>
-          <td><%= request.schedule_id %></td>
-          <td><%= request.date_of_request.strftime("%B %d, %Y") if request.date_of_request %></td>
-          <td>
-            <% case request.request_status %>
-            <% when 'pending' %>
-              <span class="badge bg-warning text-dark">Pending</span>
-            <% when 'approved' %>
-              <span class="badge bg-success">Approved</span>
-            <% when 'rejected' %>
-              <span class="badge bg-danger">Rejected</span>
-            <% when 'cancelled' %>
-              <span class="badge bg-secondary">Cancelled</span>
+    <%= turbo_stream_from "requests" %>
+
+    <% if @requests.any? %>
+      <table class="table table-hover table-striped">
+        <thead class="table-dark">
+          <tr>
+            <th>Request Type</th>
+            <% if current_user.manager? %>
+              <th>Requester</th>
             <% end %>
-          </td>
-          <td><%= request.comment %></td>
-          <% if current_user.manager? %>
-            <td>
-              <% if request.request_status == 'pending' %>
-                <!-- Approve Button triggers Approve Modal -->
-                <button type="button" class="btn btn-sm btn-success me-1" data-bs-toggle="modal" data-bs-target="#approveModal<%= request.id %>">
-                  Approve
-                </button>
-
-                <!-- Reject Button triggers Reject Modal -->
-                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#rejectModal<%= request.id %>">
-                  Reject
-                </button>
-
-                <!-- Approve Modal -->
-                <div class="modal fade" id="approveModal<%= request.id %>" tabindex="-1" aria-labelledby="approveModalLabel<%= request.id %>" aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="approveModalLabel<%= request.id %>">Approve Request</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                        <form action="<%= approve_request_path(request) %>" method="post">
-                          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-                          <div class="mb-3">
-                            <label for="approve_comment<%= request.id %>" class="form-label">Comment</label>
-                            <textarea class="form-control" id="approve_comment<%= request.id %>" name="comment" required></textarea>
-                          </div>
-                          <button type="submit" class="btn btn-success">Approve</button>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Reject Modal -->
-                <div class="modal fade" id="rejectModal<%= request.id %>" tabindex="-1" aria-labelledby="rejectModalLabel<%= request.id %>" aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="rejectModalLabel<%= request.id %>">Reject Request</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                        <form action="<%= reject_request_path(request) %>" method="post">
-                          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-                          <div class="mb-3">
-                            <label for="reject_comment<%= request.id %>" class="form-label">Comment</label>
-                            <textarea class="form-control" id="reject_comment<%= request.id %>" name="comment" required></textarea>
-                          </div>
-                          <button type="submit" class="btn btn-danger">Reject</button>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              <% else %>
-                <span>No Actions</span>
+            <th>Shift ID</th>
+            <th>Schedule ID</th>
+            <th>Swap Shift ID</th>
+            <th>Swap Schedule ID</th>
+            <th>Date of Request</th>
+            <th>Status</th>
+            <th>Manager Comment</th>
+            <% if current_user.manager? %>
+              <th>Actions</th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody>
+          <% @requests.each do |request| %>
+            <tr>
+              <td><%= request.request_type.capitalize %></td>
+              <% if current_user.manager? %>
+                <td><%= request.user.name %> (ID: <%= request.user.id %>)</td>
               <% end %>
-            </td>
-          <% end %>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+              <td><%= request.shift_id %></td>
+              <td><%= request.schedule_id %></td>
+              <td><%= request.swap_with_shift_id %></td>
+              <td><%= Shift.find(request.swap_with_shift_id).schedule_id if request.swap_with_shift_id.present? %></td>
+              <td><%= request.date_of_request.strftime("%B %d, %Y") if request.date_of_request %></td>
+              <td>
+                <% case request.request_status %>
+                  <% when 'pending' %>
+                    <span class="badge bg-warning text-dark">Pending</span>
+                  <% when 'approved' %>
+                    <span class="badge bg-success">Approved</span>
+                  <% when 'rejected' %>
+                    <span class="badge bg-danger">Rejected</span>
+                  <% when 'cancelled' %>
+                    <span class="badge bg-secondary">Cancelled</span>
+                <% end %>
+              </td>
+              <td><%= request.comment %></td>
+              <% if current_user.manager? %>
+                <td>
+                  <% if request.request_status == 'pending' %>
+                    <!-- Approve Button triggers Approve Modal -->
+                    <button type="button" class="btn btn-sm btn-success me-1" data-bs-toggle="modal" data-bs-target="#approveModal<%= request.id %>">
+                      Approve
+                    </button>
 
-<% else %>
-  <p>No requests found.</p>
-<% end %>
+                    <!-- Reject Button triggers Reject Modal -->
+                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#rejectModal<%= request.id %>">
+                      Reject
+                    </button>
+
+                    <!-- Approve Modal -->
+                    <div class="modal fade" id="approveModal<%= request.id %>" tabindex="-1" aria-labelledby="approveModalLabel<%= request.id %>" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="approveModalLabel<%= request.id %>">Approve Request</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <form action="<%= approve_request_path(request) %>" method="post">
+                              <%= hidden_field_tag :_method, "patch" %> <!-- Specify PATCH method -->
+                              <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+                              <div class="mb-3">
+                                <label for="approve_comment<%= request.id %>" class="form-label">Comment</label>
+                                <textarea class="form-control" id="approve_comment<%= request.id %>" name="comment" required></textarea>
+                              </div>
+                              <button type="submit" class="btn btn-success">Approve</button>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Reject Modal -->
+                    <div class="modal fade" id="rejectModal<%= request.id %>" tabindex="-1" aria-labelledby="rejectModalLabel<%= request.id %>" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="rejectModalLabel<%= request.id %>">Reject Request</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <form action="<%= reject_request_path(request) %>" method="post">
+                              <%= hidden_field_tag :_method, "patch" %> <!-- Specify PATCH method -->
+                              <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+                              <div class="mb-3">
+                                <label for="reject_comment<%= request.id %>" class="form-label">Comment</label>
+                                <textarea class="form-control" id="reject_comment<%= request.id %>" name="comment" required></textarea>
+                              </div>
+                              <button type="submit" class="btn btn-danger">Reject</button>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  <% else %>
+                    <span>No Actions</span>
+                  <% end %>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>No requests found.</p>
+    <% end %>
+  </div>
+</div>

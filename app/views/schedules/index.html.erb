@@ -1,77 +1,88 @@
-<div class="page-container">
-  <h1>Work Schedule</h1>
-
-  <!-- Calendar structure -->
-  <div class="calendar-container">
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <% Date::DAYNAMES.each do |day| %>
-            <th><%= day %></th>
-          <% end %>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <% Date.today.all_week.each do |date| %>
-            <td>
-              <h5><%= date.strftime("%B %d, %Y") %></h5>
-              <% @schedules.each do |schedule| %>
-                <% if schedule.date == date %>
-                  <% schedule.shifts.each do |shift| %>
-                    <div class="shift-block">
-                      <p><strong>Employee:</strong> <%= shift.user.name %></p>
-                      <p><strong>Time:</strong> <%= shift.shift_time.strftime("%I:%M %p") %></p>
-                      <p><strong>Site:</strong> <%= shift.schedule.site.name %></p>
-                      <% if current_user.manager? %>
-                        <%= link_to "Edit Shift", edit_shift_path(shift), class: "btn btn-secondary" %>
-                        <!-- Button to trigger modal for creating or editing shifts -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#shiftModal">
-                          Create/Edit Shift
-                        </button>
-                      <% end %>
-                    </div>
-                  <% end %>
-                <% end %>
-              <% end %>
-            </td>
-          <% end %>
-        </tr>
-      </tbody>
-    </table>
+<h1>All Schedules</h1>
+<%= render partial: "shared/schedule_card", collection: @schedules %>
+<div data-controller="calendar" id="calendar"></div>
+<!-- app/views/schedules/index.html.erb -->
+<div class="calendar">
+  <div class="timeline">
+    <div class="spacer"></div>
+    <div class="time-marker">9 AM</div>
+    <div class="time-marker">10 AM</div>
+    <div class="time-marker">11 AM</div>
+    <div class="time-marker">12 PM</div>
+    <div class="time-marker">1 PM</div>
+    <div class="time-marker">2 PM</div>
+    <div class="time-marker">3 PM</div>
+    <div class="time-marker">4 PM</div>
+    <div class="time-marker">5 PM</div>
+    <div class="time-marker">6 PM</div>
   </div>
-
-  <!-- Modal for creating/editing shifts -->
-  <div class="modal fade" id="shiftModal" tabindex="-1" aria-labelledby="shiftModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="shiftModalLabel">Create/Edit Shift</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  <div class="days">
+    <div class="day mon">
+      <div class="date">
+        <p class="date-num">9</p>
+        <p class="date-day">Mon</p>
+      </div>
+      <div class="events">
+        <div class="event start-2 end-5 securities">
+          <p class="title">Alice Brown</p>
+          <p class="time">2 PM - 5 PM</p>
         </div>
-        <div class="modal-body">
-          <%= form_with model: @shift, local: true do |f| %>
-            <div class="field">
-              <%= f.label :shift_date %>
-              <%= f.date_field :shift_date %>
-            </div>
-            <div class="field">
-              <%= f.label :shift_time %>
-              <%= f.time_field :shift_time %>
-            </div>
-            <div class="field">
-              <%= f.label :user_id, "Assign to Employee" %>
-              <%= f.collection_select :user_id, User.all, :id, :name, prompt: "Select Employee" %>
-            </div>
-            <div class="field">
-              <%= f.label :schedule_id, "Assign to Schedule" %>
-              <%= f.collection_select :schedule_id, Schedule.all, :id, :date, prompt: "Select Schedule" %>
-            </div>
-            <div class="actions">
-              <%= f.submit %>
-            </div>
-          <% end %>
+      </div>
+    </div>
+    <div class="day tues">
+      <div class="date">
+        <p class="date-num">10</p>
+        <p class="date-day">Tues</p>
+      </div>
+      <div class="events">
+        <div class="event start-10 end-12 corp-fi">
+          <p class="title">Alice Brown</p>
+          <p class="time">10 AM - 12 PM</p>
         </div>
+        <div class="event start-1 end-4 ent-law">
+          <p class="title">Bob Wilson</p>
+          <p class="time">1PM - 4PM</p>
+        </div>
+      </div>
+    </div>
+    <div class="day wed">
+      <div class="date">
+        <p class="date-num">11</p>
+        <p class="date-day">Wed</p>
+      </div>
+      <div class="events">
+        <div class="event start-12 end-1 writing">
+          <p class="title">Alice Brown</p>
+          <p class="time">11 AM - 12 PM</p>
+        </div>
+        <div class="event start-2 end-5 securities">
+          <p class="title">Bob Wilson</p>
+          <p class="time">2 PM - 5 PM</p>
+        </div>
+      </div>
+    </div>
+    <div class="day thurs">
+      <div class="date">
+        <p class="date-num">12</p>
+        <p class="date-day">Thurs</p>
+      </div>
+      <div class="events">
+        <div class="event start-10 end-12 corp-fi">
+          <p class="title">Bob Wilson</p>
+          <p class="time">10 AM - 12 PM</p>
+        </div>
+        <div class="event start-1 end-4 ent-law">
+          <p class="title">Alice Brown</p>
+          <p class="time">1PM - 4PM</p>
+        </div>
+      </div>
+    </div>
+    <div class="day fri">
+      <div class="date">
+        <p class="date-num">13</p>
+        <p class="date-day">Fri</p>
+      </div>
+      <div class="events">
       </div>
     </div>
   </div>

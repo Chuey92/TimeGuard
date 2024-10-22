@@ -1,0 +1,45 @@
+<div class="container mt-5">
+  <h1>Clock In</h1>
+
+  <% if @next_shift.present? %>
+    <p>Your next upcoming shift is on <%= @next_shift.shift_date.strftime("%B %d, %Y") %> at <%= @next_shift.shift_time.strftime("%I:%M %p") %>.</p>
+    <p>Would you like to clock in to this shift?</p>
+
+    <button id="clockInButton" class="btn btn-primary">Clock In</button>
+
+  <% else %>
+    <p>You do not have an assigned shift right now. Your next shift is on <%= @next_shift.shift_date.strftime("%B %d, %Y") %> at <%= @next_shift.shift_time.strftime("%I:%M %p") %>.</p>
+  <% end %>
+
+  <p id="locationStatus"></p>
+</div>
+
+<script>
+  document.getElementById('clockInButton').addEventListener('click', function() {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const { latitude, longitude } = position.coords;
+
+      // Send the coordinates to your server to check if user is at the site location
+      fetch("<%= clock_in_shift_path(@next_shift) %>", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-Token": "<%= form_authenticity_token %>"
+        },
+        body: JSON.stringify({
+          latitude: latitude,
+          longitude: longitude
+        })
+      }).then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            document.getElementById('locationStatus').textContent = "Clocked in successfully!";
+          } else {
+            document.getElementById('locationStatus').textContent = data.message;
+          }
+        });
+    }, (error) => {
+      document.getElementById('locationStatus').textContent = "Unable to retrieve your location.";
+    });
+  });
+</script>

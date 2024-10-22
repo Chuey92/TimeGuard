@@ -13,24 +13,22 @@
 }
 
 .body-landing {
-  // background effect
   background: linear-gradient(-225deg, #adeae9, #C5C1FF, #FFBAC3);
   background-size: 400% 400%;
   animation: gradientBG 15s ease infinite;
-  width: 100vw;
-  height: 100vh;
+  min-height: 100vh; /* Ensure it takes the full height of the screen */
+  display: flex;
+  flex-direction: column;
 }
 
 .container-landing {
-  height: 80vh;
+  flex: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top:0px;
-  padding:0;
-
-  
-
+  padding: 0;
+  margin: 0;
+  height: 100%; /* Full height to push footer off-screen */
 }
 
 .content-landing {
@@ -40,9 +38,10 @@
   flex-direction: column;
   justify-content: center;
   margin: 0 20px 0 0px;
-    h1{
-      margin-bottom: 10px;
-    }
+
+  h1 {
+    margin-bottom: 10px;
+  }
 }
 
 .img-landing {
@@ -51,7 +50,7 @@
   align-items: center;
   justify-content: center;
   background-color: white;
-  height:80%;
+  height: 80%;
   margin-right: 25px;
 }
 

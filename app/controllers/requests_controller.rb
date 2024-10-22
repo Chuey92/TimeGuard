@@ -21,10 +21,18 @@ class RequestsController < ApplicationController
   def create
     @request = current_user.requests.build(request_params)
     authorize @request
+      # Retrieve the schedule for the selected shift and the shift they want to swap with
+    @request.schedule_id = Shift.find(@request.shift_id).schedule_id
+    swap_shift = Shift.find(@request.swap_with_shift_id)
+    @request.swap_schedule_id = swap_shift.schedule_id # Assuming swap_schedule_id exists
+
+    @request.request_status ||= "pending"
+    @request.date_of_request = Time.current
     if @request.save
       redirect_to requests_path, notice: "Request created successfully."
     else
-      render :new
+      puts @request.errors.full_messages # Debug the validation errors
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -58,7 +66,7 @@ class RequestsController < ApplicationController
   end
 
   def request_params
-    params.require(:request).permit(:shift_id, :schedule_id, :date_of_request, :comment, :request_type, :request_status)
+    params.require(:request).permit(:shift_id, :schedule_id, :swap_with_shift_id, :comment, :request_type, :request_status)
   end
 
   def handle_request_update(status, comment)
