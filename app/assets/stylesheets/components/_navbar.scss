@@ -1,31 +1,119 @@
-.navbar-lewagon {
-  justify-content: space-between;
-  padding: 0;
-}
+.sidebar {
+  height: 100vh;
+  width: 180px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: white;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  transition: width 0.3s ease;
 
-.bg-white {
-  background: white;
-}
+  display: flex;
+  flex-direction: column;
+  
+  .sidebar-toggle {
+    display: flex;
+    justify-content: end;
+    margin-bottom: 1rem;
+    
+    .btn-toggle {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+  }
 
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 1; /* Allow collapse to expand */
-}
+  .sidebar-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
 
-.navbar-lewagon .navbar-brand img {
-  width: 40px;
-  height: auto;
-}
+    .navbar-brand {
+      display: flex;
+      justify-content: center;
+    }
 
-.navbar-lewagon .navbar-nav .nav-link {
-  color: #333; /* Dark text on white background */
-}
+    .logo {
+      width: 50px;
+      height: auto;
+    }
+  }
 
-.navbar-lewagon .navbar-nav .nav-link:hover {
-  color: #ffcc00; /* Highlight color on hover */
-  text-decoration: underline;
-}
+  .sidebar-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 
-.navbar-lewagon .dropdown-menu {
-  right: 0;
-  left: auto;
+    .nav-item {
+      margin: 1rem 0;
+      display: flex;
+      align-items: center;
+
+      .nav-link {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        color: #333;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+
+        i {
+          margin-right: 10px;
+        }
+
+        span {
+          display: inline-block;
+        }
+
+        &:hover {
+          background-color: #f0f0f0;
+          color: #7128D8;
+        }
+      }
+    }
+  }
+
+  .user-avatar {
+    margin-top: auto;
+    
+    .nav-link {
+      display: flex;
+      align-items: center;
+
+      i {
+        margin-right: 10px;
+      }
+
+      span {
+        display: inline-block;
+      }
+    }
+  }
+
+  &.collapsed {
+    width: 70px;
+    transition: width 0.3s ease;
+
+    .logo {
+      width: 40px;
+    }
+
+    .nav-item {
+      text-align: center;
+
+      .nav-link {
+        padding: 0.5rem;
+
+        span {
+          display: none;
+        }
+
+        i {
+          margin: 0 auto;
+        }
+      }
+    }
+  }
 }
