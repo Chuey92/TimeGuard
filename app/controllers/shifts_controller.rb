@@ -1,6 +1,6 @@
 class ShiftsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_shift, only: [:show, :edit, :update, :destroy, :clock_in]
+  before_action :set_shift, only: %i[show edit update destroy clock_in]
 
   def index
     @shifts = policy_scope(Shift)
@@ -74,6 +74,6 @@ class ShiftsController < ApplicationController
   end
 
   def shift_params
-    params.require(:shift).permit(:user_id, :schedule_id, :shift_date, :shift_time, :clocked_in, :start_time, :end_time)
+    params.require(:shift).permit(:user_id, :schedule_id, :shift_date, :start_time, :clocked_in, :start_time, :end_time)
   end
 end

@@ -14,7 +14,7 @@ class PagesController < ApplicationController
         info_window_html: render_to_string(partial: "sites/info_window", locals: { site: })
       }
     end
-    @next_shift = Shift.where('shift_time > ?', Time.now).order(shift_time: :asc).first
+    @next_shift = Shift.where('start_time > ?', Time.now).order(start_time: :asc).first
     @schedules = Schedule.all
   end
 end
