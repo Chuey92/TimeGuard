@@ -1,7 +1,7 @@
 <!-- app/views/requests/index.html.erb -->
 
 <div class='container-dashboard flex mt-3'>
-
+<%= render "shared/sidebar" %>
 
   <div class="page-container">
     <h1><%= current_user.manager? ? "All Requests" : "My Requests" %></h1>
