@@ -4,7 +4,10 @@
 
 
   <div class="page-container">
+  <div class="requests-header">
     <h1><%= current_user.manager? ? "All Requests" : "My Requests" %></h1>
+    <%= link_to "New Request", new_request_path, class: "mt-2 btn btn-clockin" %>
+  </div>
 
     <%= turbo_stream_from "requests" %>
 
