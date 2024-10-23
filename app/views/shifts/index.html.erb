@@ -24,7 +24,7 @@
             <% if current_user.manager? %>
               <%= link_to "Edit Shift", edit_shift_path(shift), class: "btn btn-secondary" %>
               <%= link_to "Delete Shift", shift_path(shift), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
-              <%= button_to "Clock In", clock_ins_path(shift_id: shift.id), method: :post, class: "btn btn-primary" %>
+              <%= button_to "Clock In", clock_ins_path(shift_id: shift.id), method: :post, class: "btn btn-clockin" %>
             <% end %>
           </p>
         </div>

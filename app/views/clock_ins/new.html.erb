@@ -20,7 +20,7 @@
       <div class="card">
         <p>Your next upcoming shift is <%= @upcoming_shift.shift_date %> at <%= @upcoming_shift.schedule.site.name %>.</p>
         <p>Would you like to clock in to this shift?</p>
-        <%= button_to "Clock In", clock_ins_path(shift_id: @upcoming_shift.id), method: :post, class: "mt-2 btn btn-primary" %>
+        <%= button_to "Clock In", clock_ins_path(shift_id: @upcoming_shift.id), method: :post, class: "mt-2 btn btn-clockin" %>
       </div>
   
 

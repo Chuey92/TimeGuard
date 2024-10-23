@@ -11,18 +11,30 @@
 
   .btn-primary {
     background-color: #967eb8;
-    border-color: #8c47c4;
+    border-color: #8f56bd;
     color: #fff;
 
     &:hover {
       background-color: #7c43ab;
       border-color: #8928d8;
+      color: #fff;
     }
   }
   
+  .btn-clockin {
+    background-color: #72b984;
+    border-color: #50ba6b;
+    color: #fff;
+
+    &:hover {
+      background-color: #2bb94e;
+      border-color: #50ba6b;
+      color: #fff;
+    }
+  }
   
   .btn-secondary {
-    background-color: #007bff;
+    background-color: #034fa0c0;
     border-color: #0056b3;
     color: #fff;
 
@@ -33,7 +45,7 @@
   }
   
   .btn-danger {
-    background-color: #dc3545;
+    background-color: #e65563;
     border-color: #dc3545;
     color: #fff;
     &:hover {
