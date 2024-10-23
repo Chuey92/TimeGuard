@@ -3,11 +3,7 @@
     <button class="btn btn-toggle fa-solid fa-minus" data-action="sidebar#toggle" data-sidebar-target="toggle" id="toggleSidebar" aria-label="Toggle Sidebar"></button>
   </div>
 
-  <div class="sidebar-header">
-    <%= link_to root_path, class: "sidebar-brand" do %>
-      <%= image_tag "logo-r.png", class: "logo" %>
-    <% end %>
-  </div>
+
 
   <ul class="sidebar-nav" id="sidebarNav">
     <% if user_signed_in? %>
@@ -62,6 +58,11 @@
         <% end %>
       </li>
     <% end %>
+     <div class="sidebar-header">
+    <%= link_to root_path, class: "sidebar-brand" do %>
+      <%= image_tag "logo-r.png", class: "logo" %>
+    <% end %>
+  </div>
   </ul>
 
   <ul class="sidebar-nav user-avatar mt-auto">
