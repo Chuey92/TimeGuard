@@ -18,36 +18,49 @@
           <%= link_to requests_path, class: 'card-link' do %>
             <div class="card-content">
               <p>You have</p>
-              <h2><%= Request.where(request_status: nil).count %></h2>
-              <p>unsolved request<%= Request.where(request_status: nil).count == 1 ? '' : 's'%></p>
+              <h2><%= Request.where(request_status: "pending").count %></h2>
+              <p>pending request<%= Request.where(request_status: nil).count == 1 ? '' : 's'%></p>
             </div>
           <% end %>
         </div>
 
 
       <!-- todo list -->
-      <div class='dash-top-middle card-dash'>
-        <h2>To-Do List</h2>
-        <input type="text" id="todo-input" placeholder="Add a new task">
-        <button id="add-btn">Add</button>
-        <ul id="todo-list"></ul>
+      <div class='dash-top-middle card-dash' data-controller="todo">
+        <div class="todo-list">
+          <h3>Hello <%= current_user.name%> ! Here's your today's to-dos : </h3>
+          <ul id="todo-items" data-todo-target="todoList">
+            <!-- Todo items will be dynamically added here -->
+            <li>
+              <div class="todo-item">
+                <input type="checkbox" class="todo-checkbox" ${completed ? 'checked' : ''}>
+                <span class="todo-text ${completed ? 'completed' : ''}">${text}</span>
+                <button class="todo-delete-btn">X</button>
+              </div>
+            </li>
+          </ul>
+          <button id="add-todo" class="add-todo-btn" data-action="click->todo#addTodo">+</button>
+        </div>
       </div>
-
 
       <!-- current time & next shift -->
       <div class='dash-top-right'>
         <!-- clock -->
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
         <div class="dash-clock card-dash" data-controller="dashboard">
-          <h4><div id="clock"></div></h4>
+          <div id="clock"></div>
         </div>
         <!-- shift -->
         <div class='dash-next-shift card-dash'>
           <ul>
             <% if @next_shift %>
-              <li>Next shift starts at</li>
+             <%= link_to shift_path(@next_shift), class:'card-link' do %>
+              <li><h5>Next shift starts at: </h5></li>
               <li><%= @next_shift.shift_time.strftime("%H:%M") %></li>
               <li><%= @next_shift.schedule.site.name %></li>
               <li>On duty: <%= @next_shift.user.name %>
+              <li>Status: <%= @next_shift.clocked_in ? "Arrived" : "On the way"%><li>
+             <% end %>
             <% else %>
               <li>No upcoming shifts.</li>
             <% end %>
@@ -69,6 +82,9 @@
 
       <!-- Map -->
       <div class='dash-bottom-right card-dash'>
+
+        <%= link_to "+", new_site_path, class: "add-button" %>
+
         <div class="map" style="width: 100%; height: 350px;"
           data-controller="map"
           data-map-markers-value="<%= @markers.to_json %>"
