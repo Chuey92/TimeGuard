@@ -14,47 +14,53 @@
       <li class="nav-item">
         <%= link_to root_path, class: "nav-link" do %>
           <i class="fas fa-home"></i> <span>Home</span>
-
         <% end %>
       </li>
+
+      <!-- Allowing non-manager users access to Dashboard -->
+      <li class="nav-item">
+        <%= link_to dashboard_path, class: "nav-link" do %>
+          <i class="fas fa-chart-line"></i> <span>Dashboard</span>
+        <% end %>
+      </li>
+
+      <!-- Allowing non-manager users access to Schedules -->
+      <li class="nav-item">
+        <%= link_to schedules_path, class: "nav-link" do %>
+          <i class="fas fa-calendar-alt"></i> <span>Schedule</span>
+        <% end %>
+      </li>
+
+      <!-- Sites link is only visible to managers -->
       <% if current_user.manager? %>
-        <li class="nav-item">
-          <%= link_to dashboard_path, class: "nav-link" do %>
-            <i class="fas fa-chart-line"></i> <span>Dashboard</span>
-          <% end %>
-        </li>
-        <li class="nav-item">
-          <%= link_to shifts_path, class: "nav-link" do %>
-            <i class="fas fa-clock"></i> <span>Shifts</span>
-          <% end %>
-        </li>
-        <li class="nav-item">
-          <%= link_to schedules_path, class: "nav-link" do %>
-            <i class="fas fa-calendar-alt"></i> <span>Schedule</span>
-          <% end %>
-        </li>
-      <% else %>
         <li class="nav-item">
           <%= link_to sites_path, class: "nav-link" do %>
             <i class="fas fa-map-marker-alt"></i> <span>Sites</span>
           <% end %>
         </li>
-        <li class="nav-item">
-          <%= link_to shifts_path, class: "nav-link" do %>
-            <i class="fas fa-clock"></i> <span>Shifts</span>
-          <% end %>
-        </li>
+      <% end %>
+
+      <!-- Shifts link is visible to all users -->
+      <li class="nav-item">
+        <%= link_to shifts_path, class: "nav-link" do %>
+          <i class="fas fa-clock"></i> <span>Shifts</span>
+        <% end %>
+      </li>
+
+      <!-- Additional link for non-managers -->
+      <% unless current_user.manager? %>
         <li class="nav-item">
           <%= link_to clock_in_page_path, class: "nav-link" do %>
             <i class="fas fa-clock"></i> <span>Clock In</span>
           <% end %>
         </li>
       <% end %>
+
       <li class="nav-item">
-          <%= link_to requests_path, class: "nav-link" do %>
-            <i class="fas fa-envelope"></i> <span>Requests</span>
-          <% end %>
-        </li>
+        <%= link_to requests_path, class: "nav-link" do %>
+          <i class="fas fa-envelope"></i> <span>Requests</span>
+        <% end %>
+      </li>
     <% end %>
   </ul>
 
@@ -65,10 +71,6 @@
           <i class="fa-solid fa-user"></i> <span>Account</span>
         </a>
         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="Dropdown">
-        <!--
-          <a class="dropdown-item" href="<%= requests_path %>">Requests</a>
-          <a class="dropdown-item" href="<%= new_request_path %>">New Request</a>
-          -->
           <%= link_to "Log out", destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class: "dropdown-item" %>
         </div>
       </li>
