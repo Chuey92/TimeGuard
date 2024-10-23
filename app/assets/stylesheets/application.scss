@@ -54,6 +54,8 @@ html body {
 
 .page-container {
     padding: 20px;
+    margin-left: 30px;
+    width: 100%;
 }
 
 .shift-block {
@@ -67,4 +69,22 @@ html body {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
+}
+
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-actions {
+  justify-content: center;
+  display: flex;
+
+}
+
+.login-inner {
+  width: 30%;
+  margin-bottom: 40px;
 }

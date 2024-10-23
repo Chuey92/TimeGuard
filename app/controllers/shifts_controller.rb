@@ -28,9 +28,9 @@ class ShiftsController < ApplicationController
   def update
     authorize @shift
     if @shift.update(shift_params)
-      render json: @shift
+      redirect_to @shift, notice: "Shift updated successfully."
     else
-      render json: { error: @shift.errors.full_messages }, status: :unprocessable_entity
+      render :edit
     end
   end
 

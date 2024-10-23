@@ -1,8 +1,24 @@
+<div class='container-dashboard flex mt-3'>
+  <div class='sidebar'>
+       <%= render "shared/sidebar" %>
+  </div>
+
+
+
+
+  <div class="page-container">
 <h1>Shift Details</h1>
+<div class="card-container">
+        <div class="card">
 <p><strong>Employee:</strong> <%= @shift.user.name %></p>
 <p><strong>Shift Date:</strong> <%= @shift.shift_date.strftime("%B %d, %Y") %></p>
 <p><strong>Shift Time:</strong> <%= @shift.start_time.strftime("%I:%M %p") %></p>
 <p><strong>Site:</strong> <%= @shift.schedule.site.name %> (<%= @shift.schedule.site.address %>)</p>
 <p><strong>Clocked In:</strong> <%= @shift.clocked_in ? "Yes" : "No" %></p>
-
+<p class="mt-3">
 <%= link_to "Request a Swap", new_request_path(shift_id: @shift.id), class: "btn btn-warning" %>
+</p>
+</div>
+    </div>
+  </div>
+</div>

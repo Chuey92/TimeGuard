@@ -9,7 +9,13 @@
 
 
   <div class="page-container">
-    <h1>Your Shifts</h1>
+    <h1>Shifts</h1>
+
+    <% if current_user.manager? %>
+  <div class="text-right mb-3">
+    <%= link_to "Create New Shift", new_shift_path, class: "btn btn-primary" %>
+  </div>
+<% end %>
 
     <div class="card-container">
       <% @shifts.each do |shift| %>
@@ -19,7 +25,7 @@
           <p><strong>Shift Time:</strong> <%= shift.start_time.strftime("%I:%M %p") %></p>
           <p><strong>Site:</strong> <%= shift.schedule.site.name %> (<%= shift.schedule.site.address %>)</p>
           <p><strong>Clocked In:</strong> <%= shift.clocked_in ? "Yes" : "No" %></p>
-          <p>
+          <p class="mt-3">
             <%= link_to "View Shift", shift_path(shift), class: "btn btn-primary" %>
             <% if current_user.manager? %>
               <%= link_to "Edit Shift", edit_shift_path(shift), class: "btn btn-secondary" %>

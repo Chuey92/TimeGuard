@@ -1,13 +1,15 @@
 <div class="page-container">
-    <h1>Your Sites</h1>
-<div class='container-dashboard flex mt-3'>
+
+<div class='container-dashboard '>
 
 <%= render "shared/sidebar" %>
 
+<%# <h1>Your Sites</h1> %>
   <div class="map" style="width: 70%; height: 450px;"
     data-controller="map"
     data-map-markers-value="<%= @markers.to_json %>"
     data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
   </div>
+
 </div>
 </div>

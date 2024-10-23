@@ -29,6 +29,7 @@ class SchedulesController < ApplicationController
   #   @schedules = Schedule.includes(:shifts) # Ensure you load the schedules with associated shifts
   # end
 
+
   def index
     # Scope your query to the dates being shown:
     start_date = params.fetch(:start_date, Date.today).to_date
@@ -37,6 +38,8 @@ class SchedulesController < ApplicationController
     @shifts = Shift.where(start_time: start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week)
 
     # Or, for a weekly view:
-    # @meetings = Meeting.where(starts_at: start_date.beginning_of_week..start_date.end_of_week)
+      # @meetings = Meeting.where(starts_at: start_date.beginning_of_week..start_date.end_of_week)
   end
+
+
 end
