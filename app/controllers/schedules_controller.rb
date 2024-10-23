@@ -2,7 +2,12 @@ class SchedulesController < ApplicationController
   # Other actions...
   #
   def index
-    @shifts = Shift.all
+    @today = params[:start_date] ? Date.parse(params[:start_date]) : Date.today
+    @schedules = Schedule.includes(:shifts) # Ensure you load schedules with associated shifts
+    respond_to do |format|
+      format.html # renders the default index.html.erb
+      format.js   # renders index.js.erb for AJAX requests
+    end
   end
 
   def update_event
@@ -27,9 +32,5 @@ class SchedulesController < ApplicationController
 
   def update_shift(event)
     event.update(shift_date: params[:start], end_time: params[:end]) # Adjust these fields as necessary
-  end
-
-  def index
-    @schedules = Schedule.includes(:shifts) # Ensure you load the schedules with associated shifts
   end
 end
