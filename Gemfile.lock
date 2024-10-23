@@ -178,7 +178,7 @@ GEM
     mini_mime (1.1.5)
     minitest (5.25.1)
     msgpack (1.7.3)
-    net-imap (0.4.17)
+    net-imap (0.5.0)
       date
       net-protocol
     net-pop (0.1.2)
@@ -306,8 +306,8 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
-    simple_calendar (2.4.3)
-      rails (>= 3.0)
+    simple_calendar (3.0.4)
+      rails (>= 6.1)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -372,7 +372,7 @@ DEPENDENCIES
   rubocop-rails-omakase
   sassc-rails
   selenium-webdriver
-  simple_calendar (~> 2.4)
+  simple_calendar (~> 3.0)
   simple_form!
   sprockets-rails
   stimulus-rails
