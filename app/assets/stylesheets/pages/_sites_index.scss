@@ -1,55 +1,7 @@
 /* app/assets/stylesheets/sites.css */
-
-
-
-
-
-
-
-
-.menu-bar {
-  // background-image: linear-gradient(to top, #bdc2e8 0%, #bdc2e8 1%, #e6dee9 100%);
-  border-radius: 5px;
+.container-sites {
   display: flex;
-  flex-direction: column;
-  top: 0;
-  left: 0;
-  width: 250px;
-  padding: 10px 4px;
-  background: #FFF;
-  transition: all 0.3s ease;
-  z-index: 100;
-
+  flex-direction: row;
+  width: 100hw;
+  height: auto;
 }
-
-.menu-bar-title {
-  color: rgba(0,0,0,0.65);
-  text-align: center;
-}
-
-
-
-
-
-.list-group-item {
-  padding: 15px 0 15px 0;
-  font-size: 16px;
-  height: 50px;
-  list-style: none;
-  display: flex;
-  text-align: center;
-  border-color: rgb(228, 224, 224);
-  background-color: white;
-
-  a {
-    text-decoration: none;
-    color: #000;
-  }
-
-}
-
- .list-group-item:hover {
-    background-color:#7128d8;
-
-    a {color:white;}
-  }

@@ -12,7 +12,7 @@
   <div class="mb-3">
     <%= form.label :shift_id, "Select Your Shift", class: "form-label" %>
     <%= form.collection_select :shift_id,
-      current_user.shifts.map { |shift| [ "#{shift.shift_time.strftime('%I:%M %p')} on #{shift.shift_date.strftime('%A, %B %d')} at site #{shift.schedule.site.name}", shift.id ] },
+      current_user.shifts.map { |shift| [ "#{shift.start_time.strftime('%I:%M %p')} on #{shift.shift_date.strftime('%A, %B %d')} at site #{shift.schedule.site.name}", shift.id ] },
       :last, :first, { prompt: "Select Your Shift" }, class: "form-select", required: true %>
   </div>
 
@@ -20,7 +20,7 @@
   <div class="mb-3">
     <%= form.label :swap_with_shift_id, "Select Which Shift You Would Like to Swap To", class: "form-label" %>
     <%= form.collection_select :swap_with_shift_id,
-      Shift.where.not(user_id: current_user.id).where("shift_date >= ?", Date.today).map { |shift| [ "#{shift.user.name} - #{shift.shift_time.strftime('%I:%M %p')} on #{shift.shift_date.strftime('%A, %B %d')} at site #{shift.schedule.site.name}", shift.id ] },
+      Shift.where.not(user_id: current_user.id).where("shift_date >= ?", Date.today).map { |shift| [ "#{shift.user.name} - #{shift.start_time.strftime('%I:%M %p')} on #{shift.shift_date.strftime('%A, %B %d')} at site #{shift.schedule.site.name}", shift.id ] },
       :last, :first, { prompt: "Select Shift to Swap With" }, class: "form-select", required: true %>
   </div>
 

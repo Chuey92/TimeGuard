@@ -45,7 +45,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_21_152043) do
     t.bigint "user_id", null: false
     t.bigint "schedule_id", null: false
     t.date "shift_date"
-    t.time "shift_time"
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.boolean "clocked_in"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

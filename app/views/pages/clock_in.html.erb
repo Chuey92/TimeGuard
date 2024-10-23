@@ -2,13 +2,13 @@
   <h1>Clock In</h1>
 
   <% if @next_shift.present? %>
-    <p>Your next upcoming shift is on <%= @next_shift.shift_date.strftime("%B %d, %Y") %> at <%= @next_shift.shift_time.strftime("%I:%M %p") %>.</p>
+    <p>Your next upcoming shift is on <%= @next_shift.shift_date.strftime("%B %d, %Y") %> at <%= @next_shift.start_time.strftime("%I:%M %p") %>.</p>
     <p>Would you like to clock in to this shift?</p>
 
     <button id="clockInButton" class="btn btn-clockin">Clock In</button>
 
   <% else %>
-    <p>You do not have an assigned shift right now. Your next shift is on <%= @next_shift.shift_date.strftime("%B %d, %Y") %> at <%= @next_shift.shift_time.strftime("%I:%M %p") %>.</p>
+    <p>You do not have an assigned shift right now. Your next shift is on <%= @next_shift.shift_date.strftime("%B %d, %Y") %> at <%= @next_shift.start_time.strftime("%I:%M %p") %>.</p>
   <% end %>
 
   <p id="locationStatus"></p>

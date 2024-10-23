@@ -1,0 +1,22 @@
+.simple-calendar {
+  table {
+    min-height: 80vh;
+    width: 80vw;
+  }
+  .today {
+    background-color: #FAF3DD;
+  }
+}
+
+.shift {
+  color: white;
+  padding: 8px 24px;
+  border-radius: 4px;
+  background: #1EDD88;
+  transition: background 0.3s ease;
+}
+
+.shift:hover {
+  background: #1BCB7F;
+  color: white;
+}

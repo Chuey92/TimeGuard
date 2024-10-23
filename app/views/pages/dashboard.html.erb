@@ -56,7 +56,7 @@
             <% if @next_shift %>
              <%= link_to shift_path(@next_shift), class:'card-link' do %>
               <li><h5>Next shift starts at: </h5></li>
-              <li><%= @next_shift.shift_time.strftime("%H:%M") %></li>
+              <li><%= @next_shift.start_time.strftime("%H:%M") %></li>
               <li><%= @next_shift.schedule.site.name %></li>
               <li>On duty: <%= @next_shift.user.name %>
               <li>Status: <%= @next_shift.clocked_in ? "Arrived" : "On the way"%><li>

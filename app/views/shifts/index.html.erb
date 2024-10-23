@@ -16,7 +16,7 @@
         <div class="card">
           <h2><%= shift.user.name %></h2>
           <p><strong>Shift Date:</strong> <%= shift.shift_date.strftime("%B %d, %Y") %></p>
-          <p><strong>Shift Time:</strong> <%= shift.shift_time.strftime("%I:%M %p") %></p>
+          <p><strong>Shift Time:</strong> <%= shift.start_time.strftime("%I:%M %p") %></p>
           <p><strong>Site:</strong> <%= shift.schedule.site.name %> (<%= shift.schedule.site.address %>)</p>
           <p><strong>Clocked In:</strong> <%= shift.clocked_in ? "Yes" : "No" %></p>
           <p>

@@ -62,12 +62,105 @@ schedules = Schedule.create!([
   { user: non_manager_user1, date: Date.today + 2.weeks, site: sites[2] }
 ])
 # Create shifts linked to schedules and users
+# shifts = Shift.create!([
+#   { user: non_manager_user1, schedule: schedules[0], shift_date: Date.today, shift_time: "09:00", clocked_in: true },
+#   { user: non_manager_user2, schedule: schedules[1], shift_date: Date.today + 1.week, shift_time: "10:00", clocked_in: false },
+#   { user: non_manager_user1, schedule: schedules[2], shift_date: Date.today + 2.weeks, shift_time: "11:00", clocked_in: false }
+# ])
+
+
 shifts = Shift.create!([
-  { user: non_manager_user1, schedule: schedules[0], shift_date: Date.today, shift_time: "09:00", clocked_in: true },
-  { user: non_manager_user2, schedule: schedules[1], shift_date: Date.today + 1.week, shift_time: "10:00", clocked_in: false },
-  { user: non_manager_user1, schedule: schedules[2], shift_date: Date.today + 2.weeks, shift_time: "11:00", clocked_in: false }
+  {
+    user_id: 5,
+    schedule_id: 3,
+    shift_date: Date.new(2024, 10, 24),
+    start_time: DateTime.new(2024, 10, 24, 13, 00 ,00),
+    end_time: DateTime.new(2024, 10, 24, 18, 00 ,00),
+    clocked_in: false
+  },
+  {
+    user_id: 4,
+    schedule_id: 2,
+    shift_date: Date.new(2024, 10, 25),
+    start_time: DateTime.new(2024, 10, 25, 13, 00, 00),
+    end_time: DateTime.new(2024, 10, 25, 21, 00, 00),
+    clocked_in: false
+  },
+  {
+    user_id: 4,
+    schedule_id: 3,
+    shift_date: Date.new(2024, 10, 26),
+    start_time: DateTime.new(2024, 10, 26, 10, 00, 00),
+    end_time: DateTime.new(2024, 10, 26, 15, 00, 00),
+    clocked_in: false
+  },
+  {
+    user_id: 4,
+    schedule_id: 2,
+    shift_date: Date.new(2024, 10, 23),
+    start_time: DateTime.new(2024, 10, 23, 13, 00, 00),
+    end_time: DateTime.new(2024, 10, 23, 20, 00, 00),
+    clocked_in: false
+  },
+  {
+    user_id: 4,
+    schedule_id: 3,
+    shift_date: Date.new(2024, 10, 28),
+    start_time: DateTime.new(2024, 10, 28, 16, 00, 00),
+    end_time: DateTime.new(2024, 10, 28, 21, 00, 00),
+    clocked_in: false
+  },
+  {
+    user_id: 5,
+    schedule_id: 3,
+    shift_date: Date.new(2024, 10, 29),
+    start_time: DateTime.new(2024, 10, 29, 15, 00, 00),
+    end_time: DateTime.new(2024, 10, 29, 23, 00, 00),
+    clocked_in: false
+  },
+  {
+    user_id: 4,
+    schedule_id: 2,
+    shift_date: Date.new(2024, 10, 30),
+    start_time: DateTime.new(2024, 10, 30, 14, 00, 00),
+    end_time: DateTime.new(2024, 10, 30, 19, 00, 00),
+    clocked_in: false
+  },
+  {
+    user_id: 5,
+    schedule_id: 2,
+    shift_date: Date.new(2024, 10, 24),
+    start_time: DateTime.new(2024, 10, 24, 10, 00, 00),
+    end_time: DateTime.new(2024, 10, 24, 15, 00, 00),
+    clocked_in: false
+  },
+  {
+    user_id: 5,
+    schedule_id: 3,
+    shift_date: Date.new(2024, 10, 25),
+    start_time: DateTime.new(2024, 10, 25, 17, 00, 00),
+    end_time: DateTime.new(2024, 10, 25, 21, 00, 00),
+    clocked_in: false
+  },
+  {
+    user_id: 5,
+    schedule_id: 2,
+    shift_date: Date.new(2024, 10, 31),
+    start_time: DateTime.new(2024, 10, 31, 16, 00, 00),
+    end_time: DateTime.new(2024, 10, 31, 21, 00, 00),
+    clocked_in: false
+  }
 ])
-# Create requests linked to users, shifts, and schedules
+
+
+puts "Successfully created #{shifts.size} shifts."
+
+
+
+
+
+
+#Create requests linked to users, shifts, and schedules
 requests = Request.create!([
   { user: non_manager_user1, shift: shifts[0], schedule: schedules[0], date_of_request: Date.today - 1.day, comment: "Request shift change", request_type: "shift change", request_status: "pending" },
   { user: non_manager_user2, shift: shifts[1], schedule: schedules[1], date_of_request: Date.today + 5.days, comment: "Request time off", request_type: "time off", request_status: "approved" },
