@@ -1,5 +1,9 @@
 class SchedulesController < ApplicationController
   # Other actions...
+  #
+  def index
+    @shifts = Shift.all
+  end
 
   def update_event
     event = find_event

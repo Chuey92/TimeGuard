@@ -1,6 +1,9 @@
 <div class="page-container">
     <h1>Your Sites</h1>
 <div class='container-dashboard flex mt-3'>
+
+<%= render "shared/sidebar" %>
+
   <div class="map" style="width: 70%; height: 450px;"
     data-controller="map"
     data-map-markers-value="<%= @markers.to_json %>"
