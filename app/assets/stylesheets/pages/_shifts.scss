@@ -1,0 +1,22 @@
+.container-shifts {
+  display: flex;
+  gap: 20px;
+  margin:20px;
+  justify-content: start;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #E4E9F7;
+  width: 100hw;
+  height: auto;
+}
+
+.container-shifts-inner {
+  gap: 20px;
+  margin:20px;
+  justify-content: space-between;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #E4E9F7;
+  width: 100hw;
+  height: auto;
+}

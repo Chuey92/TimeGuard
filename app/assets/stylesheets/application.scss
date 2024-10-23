@@ -41,7 +41,7 @@ html body {
 }
 
 .application-body-yield {
-  height: 100vh;
+  // height: 100vh;
 
 }
 .application-body-footer {
@@ -60,4 +60,10 @@ html body {
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 5px;
+}
+
+.requests-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
