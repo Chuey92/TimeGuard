@@ -1,15 +1,42 @@
 <div class="page-container">
+  <div class='container-sites '>
+    <%# sidebar %>
+    <%= render "shared/sidebar" %>
 
-<div class='container-dashboard '>
+    <div class='sites-container-content'>
 
-<%= render "shared/sidebar" %>
+      <div class='sites-container-top'>
 
-<%# <h1>Your Sites</h1> %>
-  <div class="map" style="width: 70%; height: 450px;"
-    data-controller="map"
-    data-map-markers-value="<%= @markers.to_json %>"
-    data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+          <% if current_user.manager? %>
+          <div class="text-right mb-3">
+            <%= link_to "Add a New Site", new_site_path, class: "btn btn-primary" %>
+          </div>
+          <% end %>
+
+      </div>
+
+      <%# sites list & map%>
+      <div class='sites-container-bottom'>
+
+        <%# sites list %>
+        <div class='sites-list'>
+          <% @sites.each do |site|%>
+          <ul>
+              <li class='card' ><%= site.name%>
+                <%= site.address%></li>
+          </ul>
+            <% end %>
+
+         </div>
+
+        <div class="map-sites" style="width: 50vw; height: 450px;"
+          data-controller="map"
+          data-map-markers-value="<%= @markers.to_json %>"
+          data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+        </div>
+
+      </div>
+    </div>
+
   </div>
-
-</div>
 </div>
