@@ -10,8 +10,8 @@
 }
 
   .btn-primary {
-    background-color: #967eb8;
-    border-color: #8f56bd;
+    background-color: #7128D8;
+    border-color: #7128d8;
     color: #fff;
 
     &:hover {
@@ -20,11 +20,11 @@
       color: #fff;
     }
   }
-  
+
   .btn-clockin {
-    background-color: #72b984;
-    border-color: #50ba6b;
-    color: #fff;
+    background-color: #1EDD88;
+    border-color: #1EDD88;
+    color: white;
 
     &:hover {
       background-color: #2bb94e;
@@ -32,7 +32,7 @@
       color: #fff;
     }
   }
-  
+
   .btn-secondary {
     background-color: #034fa0c0;
     border-color: #0056b3;
@@ -43,18 +43,23 @@
       border-color: #007bff;
     }
   }
-  
+
   .btn-danger {
     background-color: #e65563;
     border-color: #dc3545;
     color: #fff;
+    width: 105.64px;
     &:hover {
       background-color: #c82333;
       border-color: #c82333;
-      
+
     }
   }
-  
+
+  .btn-success {
+    color: white;
+  }
+
   .btn:disabled {
     background-color: #ccc;
     color: #fff;

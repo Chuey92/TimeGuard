@@ -1,33 +1,38 @@
 <h1>Create New Shift</h1>
-<div class='custom-form'>
-<%= form_with model: @shift, local: true do |f| %>
-  <div class="form-group field">
-    <%= f.label :shift_date %>
-    <%= f.date_field :shift_date , class: 'form-control' %>
-  </div>
+<div class='container-dashboard flex'>
 
-  <div class="form-group field">
-    <%= f.label :start_time %>
-    <%= f.time_field :start_time , class: 'form-control' %>
-  </div>
+  <div><%= render "shared/sidebar"%></div>
 
-  <div class="form-group field">
-    <%= f.label :end_time %>
-    <%= f.time_field :end_time , class: 'form-control' %>
-  </div>
+  <div class='custom-form'>
+  <%= form_with model: @shift, local: true do |f| %>
+    <div class="form-group field">
+      <%= f.label :shift_date %>
+      <%= f.date_field :shift_date , class: 'form-control' %>
+    </div>
 
-  <div class="form-group field">
-    <%= f.label :user_id, "Assign to Employee" %>
-    <%= f.collection_select :user_id, User.all, :id, :name, prompt: "Select Employee" , class: 'form-control' %>
-  </div>
+    <div class="form-group field">
+      <%= f.label :start_time %>
+      <%= f.time_field :start_time , class: 'form-control' %>
+    </div>
 
-  <div class="field">
-    <%= f.label :schedule_id, "Assign to Schedule (Site)" %>
-    <%= f.collection_select :schedule_id, Schedule.includes(:site), :id, :site_name, prompt: "Select Schedule" , class: 'form-control' %>
-  </div>
+    <div class="form-group field">
+      <%= f.label :end_time %>
+      <%= f.time_field :end_time , class: 'form-control' %>
+    </div>
 
-  <div class="actions">
-    <%= f.submit "Create Shift", class: "btn btn-primary" %>
-  </div>
-<% end %>
+    <div class="form-group field">
+      <%= f.label :user_id, "Assign to Employee" %>
+      <%= f.collection_select :user_id, User.all, :id, :name, prompt: "Select Employee" , class: 'form-control' %>
+    </div>
+
+    <div class="field">
+      <%= f.label :schedule_id, "Assign to Schedule (Site)" %>
+      <%= f.collection_select :schedule_id, Schedule.includes(:site), :id, :site_name, prompt: "Select Schedule" , class: 'form-control' %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Create Shift", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+ </div>
 </div>
