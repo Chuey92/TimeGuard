@@ -1,37 +1,40 @@
 <!-- app/views/requests/new.html.erb -->
-<div class="page-container">
-<h1 class="mb-3">New Request</h1>
+<div class="page-container container-dashboard">
+  <%= render "shared/sidebar"%>
+  <div class='custom-form'>
+    <h1 class="mb-3">New Request</h1>
 
-<%= form_with model: @request, local: true, data: { turbo: false } do |form| %>
-  <div class="mb-3">
-    <%= form.label :request_type, "Request Type", class: "form-label" %>
-    <%= form.select :request_type, options_for_select(['time_off', 'shift_swap'], @request.request_type), { prompt: "Select Request Type" }, class: "form-select", required: true %>
+    <%= form_with model: @request, local: true, data: { turbo: false } do |form| %>
+      <div class="mb-3">
+        <%= form.label :request_type, "Request Type", class: "form-label" %>
+        <%= form.select :request_type, options_for_select(['time_off', 'shift_swap'], @request.request_type), { prompt: "Select Request Type" }, class: "form-select", required: true %>
+      </div>
+
+      <!-- Select Your Shift -->
+      <div class="mb-3">
+        <%= form.label :shift_id, "Select Your Shift", class: "form-label" %>
+        <%= form.collection_select :shift_id,
+          current_user.shifts.map { |shift| [ "#{shift.start_time.strftime('%I:%M %p')} on #{shift.shift_date.strftime('%A, %B %d')} at site #{shift.schedule.site.name}", shift.id ] },
+          :last, :first, { prompt: "Select Your Shift" }, class: "form-select", required: true %>
+      </div>
+
+      <!-- Select Which Shift You Would Like to Swap To -->
+      <div class="mb-3">
+        <%= form.label :swap_with_shift_id, "Select Which Shift You Would Like to Swap To", class: "form-label" %>
+        <%= form.collection_select :swap_with_shift_id,
+          Shift.where.not(user_id: current_user.id).where("shift_date >= ?", Date.today).map { |shift| [ "#{shift.user.name} - #{shift.start_time.strftime('%I:%M %p')} on #{shift.shift_date.strftime('%A, %B %d')} at site #{shift.schedule.site.name}", shift.id ] },
+          :last, :first, { prompt: "Select Shift to Swap With" }, class: "form-select", required: true %>
+      </div>
+
+
+      <div class="mb-3">
+        <%= form.label :comment, "Comment", class: "form-label" %>
+        <%= form.text_area :comment, class: "form-control", rows: 3, required: true %>
+      </div>
+
+      <div class="actions">
+        <%= form.submit "Create Request", class: "btn btn-primary" %>
+      </div>
+    <% end %>
   </div>
-
-  <!-- Select Your Shift -->
-  <div class="mb-3">
-    <%= form.label :shift_id, "Select Your Shift", class: "form-label" %>
-    <%= form.collection_select :shift_id,
-      current_user.shifts.map { |shift| [ "#{shift.start_time.strftime('%I:%M %p')} on #{shift.shift_date.strftime('%A, %B %d')} at site #{shift.schedule.site.name}", shift.id ] },
-      :last, :first, { prompt: "Select Your Shift" }, class: "form-select", required: true %>
-  </div>
-
-  <!-- Select Which Shift You Would Like to Swap To -->
-  <div class="mb-3">
-    <%= form.label :swap_with_shift_id, "Select Which Shift You Would Like to Swap To", class: "form-label" %>
-    <%= form.collection_select :swap_with_shift_id,
-      Shift.where.not(user_id: current_user.id).where("shift_date >= ?", Date.today).map { |shift| [ "#{shift.user.name} - #{shift.start_time.strftime('%I:%M %p')} on #{shift.shift_date.strftime('%A, %B %d')} at site #{shift.schedule.site.name}", shift.id ] },
-      :last, :first, { prompt: "Select Shift to Swap With" }, class: "form-select", required: true %>
-  </div>
-
-
-  <div class="mb-3">
-    <%= form.label :comment, "Comment", class: "form-label" %>
-    <%= form.text_area :comment, class: "form-control", rows: 3, required: true %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit "Create Request", class: "btn btn-primary" %>
-  </div>
-<% end %>
 </div>
