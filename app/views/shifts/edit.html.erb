@@ -1,6 +1,6 @@
 <div class="page-container">
 <h1>Edit Shift</h1>
-
+<div class='custom-form'>
 <%= form_with model: @shift, local: true do |f| %>
   <div class="field">
     <%= f.label :shift_date %>
@@ -28,7 +28,8 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Update Shift", class: "btn btn-primary mt-3" %>
+    <%= f.submit "Update Shift", class: "btn btn-primary mt-4" %>
   </div>
 <% end %>
+</div>
 </div>

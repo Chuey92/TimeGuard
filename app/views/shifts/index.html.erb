@@ -9,12 +9,15 @@
 
 
   <div class="page-container">
+  <div class="requests-header">
     <h1>Shifts</h1>
-
-    <% if current_user.manager? %>
-  <div class="text-right mb-3">
-    <%= link_to "Create New Shift", new_shift_path, class: "btn purple-border-button" %>
+  
+    <div class="text-right mb-3">
+      <%= link_to "Create New Shift", new_shift_path, class: "btn btn-primary" %>
+    </div>
   </div>
+    <% if current_user.manager? %>
+  
 <% end %>
 
     <div class="card-container">
