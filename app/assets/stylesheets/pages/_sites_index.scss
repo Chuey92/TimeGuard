@@ -6,7 +6,7 @@
   width: 100hw;
   height: auto;
   align-items: space-between;
-  gap: 3rem;
+
 }
 .sites-container-content {
   display: flex;
@@ -15,12 +15,13 @@
   height: auto;
   align-items: space-between;
   padding:40px;
+
 }
 .sites-container-top {
   display:flex;
   flex-direction: row;
-  padding-right: 20px;
-  padding-left: 38px;
+  // padding-right: 20px;
+  // padding-left: 38px;
   justify-content: space-between;
 }
 
@@ -36,7 +37,6 @@
 
   padding: 20px;
   border-radius: 5px;
-  gap: 20px;
 
 }
 
@@ -52,6 +52,7 @@ width: 40%;
     padding: 0;
 
     li {
+      color: #7128d8;
       display: flex;
       justify-content: space-between;
       align-items:flex;
@@ -62,7 +63,7 @@ width: 40%;
       position: relative; // 相对定位
 
       .fa-trash-alt {
-        color: #ccc;
+        color: #b3a1cd;
         font-size: 18px;
         margin-left: 10px;
         transition: color 0.3s, opacity 0.3s;

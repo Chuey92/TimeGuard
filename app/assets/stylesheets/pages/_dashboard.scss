@@ -46,6 +46,11 @@
   border-radius: 10px;
   padding: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  .todo-greetings {
+    white-space: nowrap;
+    font-size: clamp(14px, 2vw, 24px);
+  }
 }
 
 
@@ -204,10 +209,13 @@
   border: none;
   text-decoration: none;
   display: flex;
+
   align-items: center;
   justify-content: center;
   transition: background-color 0.3s ease;
-  margin-bottom: 7px;
+  margin: 15px;
+  position:absolute;
+  z-index: 10;
 
   &:hover {
     background-color: darken(#8A2BE2, 10%);
