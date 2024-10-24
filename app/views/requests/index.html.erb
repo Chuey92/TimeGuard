@@ -19,10 +19,11 @@
             <% if current_user.manager? %>
               <th>Requester</th>
             <% end %>
-            <th>Shift ID</th>
-            <th>Schedule ID</th>
-            <th>Swap Shift ID</th>
-            <th>Swap Schedule ID</th>
+            <th>Shift</th>
+            <th>Site</th>
+            <th>Swapee</th>
+            <th>Swapee Shift</th>
+            <th>Swapee Site</th>
             <th>Date of Request</th>
             <th>Status</th>
             <th>Manager Comment</th>
@@ -36,12 +37,13 @@
             <tr>
               <td><%= request.request_type.capitalize %></td>
               <% if current_user.manager? %>
-                <td><%= request.user.name %> (ID: <%= request.user.id %>)</td>
+                <td><%= request.user.name %></td>
               <% end %>
-              <td><%= request.shift_id %></td>
-              <td><%= request.schedule_id %></td>
-              <td><%= request.swap_with_shift_id %></td>
-              <td><%= Shift.find(request.swap_with_shift_id).schedule_id if request.swap_with_shift_id.present? %></td>
+              <td><%= request.shift.start_time.strftime("%I:%M %p") %></td>
+              <td><%= request.schedule.site.name %></td>
+              <td><%= Shift.find(request.swap_with_shift_id).user.name if request.swap_with_shift_id.present? %></td>
+              <td><%= Shift.find(request.swap_with_shift_id).start_time.strftime("%I:%M %p") if request.swap_with_shift_id.present? %></td>
+              <td><%= Shift.find(request.swap_with_shift_id).schedule.site.name if request.swap_with_shift_id.present? %></td>
               <td><%= request.date_of_request.strftime("%B %d, %Y") if request.date_of_request %></td>
               <td>
                 <% case request.request_status %>
