@@ -17,9 +17,11 @@
 .sites-container-top {
   display:flex;
   flex-direction: row;
-  padding-right: 40px;
-
+  padding-right: 20px;
+  padding-left: 40px;
+  justify-content: space-between;
 }
+
 .sites-container-bottom {
   width: 100%;
   flex:1;
