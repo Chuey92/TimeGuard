@@ -33,3 +33,24 @@
   color: #333;
 }
 
+.shifts-buttons {
+  display: flex;
+  justify-content: space-around;
+  font-size: 20px !important;
+}
+
+.view-shift {
+  color: #8928d8;
+}
+
+.edit-shift {
+  color: #967eb8;
+}
+
+.delete-shift {
+  color: #e65563;
+}
+
+.clock-shift {
+  color: #72b984;
+}

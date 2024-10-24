@@ -25,12 +25,20 @@
           <p><strong>Shift Time:</strong> <%= shift.start_time.strftime("%I:%M %p") %></p>
           <p><strong>Site:</strong> <%= shift.schedule.site.name %> (<%= shift.schedule.site.address %>)</p>
           <p><strong>Clocked In:</strong> <%= shift.clocked_in ? "Yes" : "No" %></p>
-          <p class="mt-3">
-            <%= link_to "View Shift", shift_path(shift), class: "btn btn-primary" %>
+          <p class="shifts-buttons mt-3">
+            <%= link_to shift_path(shift), class: "view-shift" do %>
+                <i class="fa-solid fa-magnifying-glass"></i>
+              <% end %>
             <% if current_user.manager? %>
-              <%= link_to "Edit Shift", edit_shift_path(shift), class: "btn btn-secondary" %>
-              <%= link_to "Delete Shift", shift_path(shift), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
-              <%= button_to "Clock In", clock_ins_path(shift_id: shift.id), method: :post, class: "btn btn-clockin" %>
+              <%= link_to edit_shift_path(shift), class: "edit-shift" do %>
+                <i class="fa-solid fa-pen-to-square"></i>
+              <% end %>
+              <%= link_to shift_path(shift), method: :delete, data: { confirm: "Are you sure?" }, class: "delete-shift" do %>
+                <i class="fa-solid fa-trash"></i>
+              <% end %>
+              <%= link_to clock_ins_path(shift_id: shift.id), method: :post, class: "clock-shift" do %>
+                <i class="fa-solid fa-clock"></i>
+              <% end %>
             <% end %>
           </p>
         </div>
