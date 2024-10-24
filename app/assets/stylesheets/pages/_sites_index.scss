@@ -1,5 +1,5 @@
 /* app/assets/stylesheets/sites.css */
-
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css');
 .container-sites {
 
   display: flex;
@@ -41,4 +41,43 @@
 .map-sites {
 width:100%;
 
+}
+
+
+.sites-list {
+  ul {
+    list-style-type: none;
+    padding: 0;
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      align-items:flex;
+      background-color: #f5f5f5;
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      position: relative; // 相对定位
+
+      .fa-trash-alt {
+        color: #ccc;
+        font-size: 18px;
+        margin-left: 10px;
+        transition: color 0.3s, opacity 0.3s;
+        opacity: 0; // 默认不可见
+        position: absolute; // 绝对定位
+        right: 10px; // 靠右显示
+
+        &:hover {
+          color: #73739e; // 鼠标悬停时变为紫色
+        }
+      }
+
+      &:hover {
+        .fa-trash-alt {
+          opacity: 1; // 在鼠标悬停时显示
+        }
+      }
+    }
+  }
 }

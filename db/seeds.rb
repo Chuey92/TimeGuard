@@ -75,9 +75,11 @@ end
 #   { user: manager_user3, date: Date.today + 2.weeks, site: sites[2] }
 # ])
 
+
 # Create 5 shifts for non-manager users under manager schedules
 non_manager_users = [non_manager_user1, non_manager_user2]
 shifts = []
+
 
   non_manager_users.each_with_index do |user, index|
     #  schedule = schedules[index % schedules.size] # Rotate schedules for each user

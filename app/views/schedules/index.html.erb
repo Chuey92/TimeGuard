@@ -11,9 +11,11 @@
     <% shifts.each do |shift| %>
 <%= link_to shift_path(shift), class: 'card-link' do %>
 
-      <div class="shift">
-        <p>@<%= shift.schedule.site.name %></p>
+      <div class="shift" style="background-color: <%= shift_background_color(shift.user) %>;">
+
+        <p class='shift-site-name'>@<%= shift.schedule.site.name %></p>
         <small><%= shift.time unless shift.multi_days? %></small>
+        <p><%= shift.user.name %> </p>
       </div>
       <% end %>
     <% end %>

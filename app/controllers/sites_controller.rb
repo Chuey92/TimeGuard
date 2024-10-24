@@ -28,6 +28,16 @@ class SitesController < ApplicationController
     render :new
   end
 
+  def show
+    @site = Site.find(params[:id])
+  end
+
+  def destroy
+    @site = Site.find(params[:id])
+    @site.destroy
+    redirect_to sites_path, notice: "Site successfully removed."
+  end
+
   private
 
   def authorize_manager
@@ -37,6 +47,6 @@ class SitesController < ApplicationController
   end
 
   def site_params
-    params.require(:site).permit(:name, :address)
+    params.require(:site).permit(:name, :address, :id)
   end
 end

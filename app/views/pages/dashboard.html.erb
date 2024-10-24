@@ -15,15 +15,25 @@
       <!-- unsolved requests -->
 
         <div class='dash-top-left card-dash'>
-          <%= link_to requests_path, class: 'card-link' do %>
-            <div class="card-content">
-              <p>You have</p>
-              <h2><%= Request.where(request_status: "pending").count %></h2>
-              <p>pending request<%= Request.where(request_status: nil).count == 1 ? '' : 's'%></p>
-            </div>
+          <% if current_user.manager? %>
+          <!-- Manager view unsolved request -->
+            <%= link_to requests_path, class: 'card-link' do %>
+              <div class="card-content">
+                <p>You have</p>
+                <h2><%= Request.where(request_status: "pending").count %></h2>
+                <p>pending request<%= Request.where(request_status: nil).count == 1 ? '' : 's'%></p>
+              </div>
+            <% end %>
+          <% else %><!-- user view my pending request -->
+            <%= link_to requests_path, class: 'card-link' do %>
+              <div class="card-content">
+                <p>You have</p>
+                <h2><%= Request.where(user_id: current_user.id, request_status: "pending").count %></h2>
+                <p>request<%= Request.where(request_status: "pending").count == 1 ? '' : 's'%> awaiting decision</p>
+              </div>
+            <% end %>
           <% end %>
         </div>
-
 
       <!-- todo list -->
       <div class='dash-top-middle card-dash' data-controller="todo">
@@ -52,12 +62,14 @@
         </div>
         <!-- shift -->
         <div class='dash-next-shift card-dash'>
+          <% if current_user.manager? %>
+          <!-- Manager view next shift -->
           <ul>
             <% if @next_shift %>
              <%= link_to shift_path(@next_shift), class:'card-link' do %>
-              <li><h5>Next shift starts at: </h5></li>
-              <li><%= @next_shift.start_time.strftime("%H:%M") %></li>
-              <li><%= @next_shift.schedule.site.name %></li>
+              <li><h5><b>Next shift starts on <%= @next_shift.shift_date.strftime("%d %B")%></b></h5></li>
+              <li class='time'><%= @next_shift.start_time.strftime("%H:%M") %></li>
+              <li class='place'>@ <%= @next_shift.schedule.site.name %></li>
               <li>On duty: <%= @next_shift.user.name %>
               <li>Status: <%= @next_shift.clocked_in ? "Arrived" : "On the way"%><li>
              <% end %>
@@ -65,6 +77,53 @@
               <li>No upcoming shifts.</li>
             <% end %>
           </ul>
+          <% else %><!-- user view next my shift -->
+          <ul>
+            <% if @next_shift_u %>
+              <%= link_to shift_path(@next_shift_u), class:'card-link' do %>
+              <li><h5><b>Your next shift on: <%= @next_shift_u.shift_date.strftime("%d %B")  %></b></h5></li>
+              <li class='time'><%= @next_shift_u.start_time.strftime("%H:%M") %></li>
+              <li class='place'>@ <%= @next_shift_u.schedule.site.name %></li>
+              <% end %>
+              <li>Already arrived?
+              <button id="clockInButton" class="btn btn-clockin">Clock In</button> </li>
+              <script>
+                document.getElementById('clockInButton').addEventListener('click', function() {
+                  navigator.geolocation.getCurrentPosition((position) => {
+                    const { latitude, longitude } = position.coords;
+
+                    // Send the coordinates to your server to check if user is at the site location
+                    fetch("<%= clock_in_shift_path(@next_shift) %>", {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-Token": "<%= form_authenticity_token %>"
+                      },
+                      body: JSON.stringify({
+                        latitude: latitude,
+                        longitude: longitude
+                      })
+                    }).then(response => response.json())
+                      .then(data => {
+                        if (data.success) {
+                          document.getElementById('locationStatus').textContent = "Clocked in successfully!";
+                        } else {
+                          document.getElementById('locationStatus').textContent = data.message;
+                        }
+                      });
+                  }, (error) => {
+                    document.getElementById('locationStatus').textContent = "Unable to retrieve your location.";
+                  });
+                });
+              </script>
+
+
+
+            <% else %>
+              <li>No upcoming shifts.</li>
+            <% end %>
+          </ul>
+          <% end %>
         </div>
       </div>
     </div>
@@ -73,10 +132,28 @@
 
     <!-- Bottom : Calendar and Map -->
     <div class='dash-bottom flex'>
-      <!-- Google calendar -->
+      <!-- calendar -->
       <div class='dash-bottom-left card-dash'>
-      <div class='week-calender flex'>
-        <%= week_calendar(events: @shifts, end_attribute: :end_time) do |date, shifts| %>
+      <% if current_user.manager? %>
+      <!-- Manager view calendar -->
+        <div class='week-calender flex'>
+          <%= week_calendar(events: @shifts, end_attribute: :end_time) do |date, shifts| %>
+              <%= date %>
+
+              <% shifts.each do |shift| %>
+          <%= link_to shift_path(shift), class: 'card-link' do %>
+
+                <div class="shift" style="background-color: <%= shift_background_color(shift.user) %>;">
+                  <p>@<%= shift.schedule.site.name %></p>
+                  <small><%= shift.time unless shift.multi_days? %></small>
+                </div>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+        <% else %> <!-- User view calendar -->
+        <div class='week-calender flex'>
+        <%= week_calendar(events: @shifts_u, end_attribute: :end_time) do |date, shifts| %>
             <%= date %>
 
             <% shifts.each do |shift| %>
@@ -90,14 +167,16 @@
             <% end %>
           <% end %>
         </div>
+        <% end %>
 
       </div>
 
 
       <!-- Map -->
       <div class='dash-bottom-right card-dash'>
-
+        <% if current_user.manager? %>
         <%= link_to "+", new_site_path, class: "add-button" %>
+        <% end %>
 
         <div class="map" style="width: 100%; height: 350px;"
           data-controller="map"
