@@ -24,9 +24,19 @@ class SitesController < ApplicationController
     end
   end
 
+  def show
+    @site = Site.find(params[:id])
+  end
+
+  def destroy
+    @site = Site.find(params[:id])
+    @site.destroy
+    redirect_to sites_path, notice: "Site successfully removed."
+  end
+
   private
 
   def site_params
-    params.require(:site).permit(:name, :address)
+    params.require(:site).permit(:name, :address, :id)
   end
 end

@@ -7,6 +7,7 @@ export default class extends Controller {
     this.loadTodos()
   }
 
+
   loadTodos() {
     const todos = JSON.parse(localStorage.getItem('todos')) || []
     this.todoListTarget.innerHTML = '' // 清除之前的 Todo 项

@@ -76,7 +76,7 @@
       <!-- Google calendar -->
       <div class='dash-bottom-left card-dash'>
         <div class='week-calender flex'>
-        <%= week_calendar(events: @shifts, end_attribute: :end_time) do |date, shifts| %>
+        <%= week_calendar(events: @shifts_u, end_attribute: :end_time) do |date, shifts| %>
             <%= date %>
 
             <% shifts.each do |shift| %>

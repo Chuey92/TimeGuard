@@ -74,8 +74,8 @@ shifts = Shift.create!([
     user_id: 5,
     schedule_id: 3,
     shift_date: Date.new(2024, 10, 24),
-    start_time: DateTime.new(2024, 10, 24, 13, 00 ,00),
-    end_time: DateTime.new(2024, 10, 24, 18, 00 ,00),
+    start_time: DateTime.new(2024, 10, 24, 18, 00 ,00),
+    end_time: DateTime.new(2024, 10, 24, 20, 00 ,00),
     clocked_in: false
   },
   {

@@ -22,8 +22,11 @@
         <div class='sites-list'>
           <% @sites.each do |site|%>
           <ul>
-              <li class='card' ><%= site.name%>
-                <%= site.address%></li>
+              <li class='card' ><%= site.name%>,&nbsp;
+                <%= site.address%><br>
+                <%= link_to '', site_path(site), method: :delete, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'fas fa-trash-alt' %>
+
+                </li>
           </ul>
             <% end %>
 
