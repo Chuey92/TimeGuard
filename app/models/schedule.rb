@@ -5,4 +5,6 @@ class Schedule < ApplicationRecord
   has_many :shifts, dependent: :destroy
   has_many :requests
   validates :date, presence: true
+
+  delegate :name, to: :site, prefix: true
 end

@@ -1,12 +1,12 @@
-<div class="page-container">
+
   <div class='container-sites '>
     <%# sidebar %>
     <%= render "shared/sidebar" %>
 
-    <div class='sites-container-content'>
+    <div class='sites-container-content mt-4'>
 
       <div class='sites-container-top'>
-
+      <h1>My Sites</h1>
           <% if current_user.manager? %>
           <div class="text-right mb-3">
             <%= link_to "Add a New Site", new_site_path, class: "btn btn-primary" %>
@@ -42,4 +42,3 @@
     </div>
 
   </div>
-</div>

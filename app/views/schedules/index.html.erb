@@ -1,11 +1,9 @@
-<div class="page-container">
 
-<div class='container-dashboard'>
-
-
-  <div class='sidebar'><%= render "shared/sidebar" %></div>
-
-
+  <div class='container-dashboard'>
+    <div class='sidebar'>
+      <%= render "shared/sidebar" %>
+    </div>
+    
   <div class="calendar-container">
   <%= month_calendar(events: @shifts, end_attribute: :end_time) do |date, shifts| %>
     <%= date %>
@@ -23,4 +21,3 @@
     <% end %>
   <% end %>
   </div>
-</div>

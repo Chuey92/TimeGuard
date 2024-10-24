@@ -1,3 +1,4 @@
+<div class="page-container">
 <h1>Edit Shift</h1>
 
 <%= form_with model: @shift, local: true do |f| %>
@@ -6,32 +7,28 @@
     <%= f.date_field :shift_date %>
   </div>
 
-  <div class="field">
+  <div class="field mt-2">
     <%= f.label :start_time %>
     <%= f.time_field :start_time %>
   </div>
 
-  <div class="field">
-    <%= f.label :start_time %>
-    <%= f.time_field :start_time %>
-  </div>
-
-  <div class="field">
+    <div class="field mt-2">
     <%= f.label :end_time %>
     <%= f.time_field :end_time %>
   </div>
 
-  <div class="field">
+    <div class="field mt-2">
     <%= f.label :user_id, "Assign to Employee" %>
     <%= f.collection_select :user_id, User.all, :id, :name, prompt: "Select Employee" %>
   </div>
 
-  <div class="field">
-    <%= f.label :schedule_id, "Assign to Schedule" %>
-    <%= f.collection_select :schedule_id, Schedule.all, :id, :date, prompt: "Select Schedule" %>
+    <div class="field mt-2">
+    <%= f.label :schedule_id, "Assign to Schedule (Site)" %>
+    <%= f.collection_select :schedule_id, Schedule.includes(:site), :id, :site_name, prompt: "Select Schedule" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Update Shift", class: "btn btn-primary" %>
+    <%= f.submit "Update Shift", class: "btn btn-primary mt-3" %>
   </div>
 <% end %>
+</div>

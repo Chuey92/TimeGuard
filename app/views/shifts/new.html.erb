@@ -21,9 +21,9 @@
     <%= f.collection_select :user_id, User.all, :id, :name, prompt: "Select Employee" , class: 'form-control' %>
   </div>
 
-  <div class="form-group field">
-    <%= f.label :schedule_id, "Assign to Schedule" %>
-    <%= f.collection_select :schedule_id, Schedule.all, :id, :date, prompt: "Select Schedule" , class: 'form-control' %>
+  <div class="field">
+    <%= f.label :schedule_id, "Assign to Schedule (Site)" %>
+    <%= f.collection_select :schedule_id, Schedule.includes(:site), :id, :site_name, prompt: "Select Schedule" , class: 'form-control' %>
   </div>
 
   <div class="actions">
