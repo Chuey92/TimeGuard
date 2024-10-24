@@ -6,7 +6,7 @@
       <h1 class="calendar-title"><%= t('date.month_names')[start_date.month] %> <%= start_date.year %></h1>
       <%= link_to t('simple_calendar.next', default: 'Next'), calendar.url_for_next_view, class: 'btn purple-border-button' %>
     </div>
-    <%= link_to 'Create shift', new_shift_path, class: 'btn btn-outline-warning' %>
+    <%= link_to 'Create shift', new_shift_path, class: 'btn btn-primary' %>
   </div>
 
 
