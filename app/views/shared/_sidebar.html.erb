@@ -58,18 +58,18 @@
         <% end %>
       </li>
     <% end %>
-     <div class="sidebar-header">
+     <!-- <div class="sidebar-header">
     <%= link_to root_path, class: "sidebar-brand" do %>
       <%= image_tag "logo-r.png", class: "logo" %>
     <% end %>
-  </div>
+  </div> -->
   </ul>
 
   <ul class="sidebar-nav user-avatar mt-auto">
     <% if user_signed_in? %>
       <li class="nav-item dropdown">
         <a href="#" class="nav-link avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fa-solid fa-user"></i> <span>Account</span>
+         
         </a>
         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="Dropdown">
           <%= link_to "Log out", destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class: "dropdown-item" %>
