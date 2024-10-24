@@ -212,7 +212,6 @@
 .calendar-heading {
   display: flex;
   justify-content: space-between;
-  width: 70%;
 
   a {
     color: #4a0c85;
@@ -227,6 +226,10 @@
   span {
     margin-right: 5px;
   }
+}
+
+.calender-heading-schedule {
+  width: 70%;
 }
 
 .calendar-title {
