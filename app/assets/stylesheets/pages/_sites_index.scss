@@ -1,7 +1,42 @@
 /* app/assets/stylesheets/sites.css */
+
 .container-sites {
+
   display: flex;
-  flex-direction: row;
   width: 100hw;
   height: auto;
+  align-items: space-between;
+}
+.sites-container-content {
+  display: flex;
+  flex-direction: column;
+  width: 100hw;
+  height: auto;
+  align-items: space-between;
+}
+.sites-container-top {
+  display:flex;
+  flex-direction: row;
+  padding-right: 40px;
+
+}
+.sites-container-bottom {
+  width: 100%;
+  flex:1;
+  display: flex;
+  flex-direction: row;
+  gap: 5rem;
+  align-items: space-between;
+  height: 450px;
+  //background-color:#E4E9F7;
+
+  padding: 20px;
+  border-radius: 5px;
+  gap: 20px;
+
+}
+
+.map-sites {
+width:100%;
+
 }

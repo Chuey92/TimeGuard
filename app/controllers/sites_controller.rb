@@ -18,7 +18,7 @@ class SitesController < ApplicationController
     @site = Site.new(site_params)
     @site.user = current_user
     if @site.save
-      redirect_to dashboard_path, notice: "Site was successfully created."
+      redirect_to sites_path, notice: "Site was successfully created."
     else
       flash.now[:alert] = "There was an issue creating the site."
       render :new
@@ -29,6 +29,12 @@ class SitesController < ApplicationController
   end
 
   private
+
+  def authorize_manager
+    unless current_user.manager?
+      redirect_to root_path, alert: "Only managers can create sites."
+    end
+  end
 
   def site_params
     params.require(:site).permit(:name, :address)

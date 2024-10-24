@@ -6,10 +6,7 @@ class SchedulesController < ApplicationController
     # Fetch shifts for a monthly view (first day of the month to the last day, adjusted by the week's boundaries)
     @shifts = Shift.where(start_time: start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week)
 
-    # Alternatively, for a weekly view (use if needed):
-    # @shifts = Shift.where(start_time: start_date.beginning_of_week..start_date.end_of_week)
-
-    # You can pass these variables to the view to show the selected date range or navigate between weeks/months.
-    @start_date = start_date
+    # Or, for a weekly view:
+    # @meetings = Meeting.where(starts_at: start_date.beginning_of_week..start_date.end_of_week)
   end
 end

@@ -18,8 +18,8 @@
           <%= link_to requests_path, class: 'card-link' do %>
             <div class="card-content">
               <p>You have</p>
-              <h2><%= Request.where(request_status: "pending").count %></h2>
-              <p>pending request<%= Request.where(request_status: nil).count == 1 ? '' : 's'%></p>
+              <h2><%= Request.where(user_id: current_user.id, request_status: "pending").count %></h2>
+              <p>request<%= Request.where(request_status: "pending").count == 1 ? '' : 's'%> awaiting decision</p>
             </div>
           <% end %>
         </div>
@@ -58,8 +58,8 @@
               <li><h5>Next shift starts at: </h5></li>
               <li><%= @next_shift.start_time.strftime("%H:%M") %></li>
               <li><%= @next_shift.schedule.site.name %></li>
-              <li>On duty: <%= @next_shift.user.name %>
-              <li>Status: <%= @next_shift.clocked_in ? "Arrived" : "On the way"%><li>
+              <li>Already arrived?
+              <button id="clockInButton" class="btn btn-clockin">Clock In</button> <li>
              <% end %>
             <% else %>
               <li>No upcoming shifts.</li>
@@ -75,7 +75,7 @@
     <div class='dash-bottom flex'>
       <!-- Google calendar -->
       <div class='dash-bottom-left card-dash'>
-      <div class='week-calender flex'>
+        <div class='week-calender flex'>
         <%= week_calendar(events: @shifts, end_attribute: :end_time) do |date, shifts| %>
             <%= date %>
 
@@ -90,7 +90,6 @@
             <% end %>
           <% end %>
         </div>
-
       </div>
 
 
