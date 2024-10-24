@@ -6,6 +6,7 @@
   width: 100hw;
   height: auto;
   align-items: space-between;
+  gap: 2rem;
 }
 .sites-container-content {
   display: flex;
@@ -13,6 +14,7 @@
   width: 100hw;
   height: auto;
   align-items: space-between;
+  padding:40px;
 }
 .sites-container-top {
   display:flex;
@@ -45,6 +47,8 @@ width:100%;
 
 
 .sites-list {
+width: 40%;
+
   ul {
     list-style-type: none;
     padding: 0;
