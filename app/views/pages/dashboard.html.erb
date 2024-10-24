@@ -178,7 +178,7 @@
         <%= link_to "+", new_site_path, class: "add-button" %>
         <% end %>
 
-        <div class="map" style="width: 100%; height: 350px;"
+        <div class="map" style="width: 100%; height: 450px;"
           data-controller="map"
           data-map-markers-value="<%= @markers.to_json %>"
           data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
