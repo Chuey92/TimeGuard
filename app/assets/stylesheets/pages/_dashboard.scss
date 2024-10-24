@@ -180,35 +180,55 @@
     height: 350px;
   }
 
-  .add-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: #8A2BE2;
-    color: #fff;
-    font-size: 24px;
-    border: none;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s ease;
+}
 
-    &:hover {
-      background-color: darken(#8A2BE2, 10%);
-    }
+.add-button {
+  // position: absolute;
+  // top: 10px;
+  // right: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #8A2BE2;
+  color: #fff;
+  font-size: 24px;
+  border: none;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+  margin-bottom: 7px;
 
-    &:before {
-      content: "+";
-      font-size: 24px;
-      color: #fff;
-    }
+  &:hover {
+    background-color: darken(#8A2BE2, 10%);
   }
 }
 
 .week-calendar {
   height:400px;
+}
+
+.calendar-heading {
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+
+  a {
+    color: #4a0c85;
+    text-decoration: none;
+    margin-right: 5px;
+
+    &:hover {
+      color: #8A2BE2
+    }
+  }
+
+  span {
+    margin-right: 5px;
+  }
+}
+
+.calendar-title {
+  align-self: center;
 }
