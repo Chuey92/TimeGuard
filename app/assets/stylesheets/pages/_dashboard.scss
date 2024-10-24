@@ -34,7 +34,7 @@
 
   display: flex;
   gap: 1rem;
-  height: 60%;
+  height: 65%;
   align-items: space-between;
   flex-direction: row;
 }
@@ -118,6 +118,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
      ul {
       list-style-type: none;
+      font-weight: bold;
     }
       h5 {
         color: #7128d8;
@@ -206,4 +207,8 @@
       color: #fff;
     }
   }
+}
+
+.week-calendar {
+  height:400px;
 }
