@@ -5,7 +5,7 @@ class SitesController < ApplicationController
       {
         lat: site.latitude,
         lng: site.longitude,
-        info_window_html: render_to_string(partial: "info_window", locals: { site: })
+        info_window_html: render_to_string(partial: "info_window", locals: { site: site})
       }
     end
   end
@@ -18,10 +18,14 @@ class SitesController < ApplicationController
     @site = Site.new(site_params)
     @site.user = current_user
     if @site.save
-      redirect_to sites_path, notice: "New site created!"
+      redirect_to dashboard_path, notice: "Site was successfully created."
     else
+      flash.now[:alert] = "There was an issue creating the site."
       render :new
     end
+  rescue StandardError => e
+    Rails.logger.error "Error creating site: #{e.message}"
+    render :new
   end
 
   private
