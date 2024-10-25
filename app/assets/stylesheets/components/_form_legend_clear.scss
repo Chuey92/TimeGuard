@@ -15,6 +15,7 @@ h2{
 }
 .custom-form {
   width: 60vw;
+  height: fit-content;
   margin: 50px auto;
   padding: 20px;
   background-color: #e4e9f7;
@@ -57,4 +58,9 @@ h2{
 .custom-form .actions{
   display: flex;
   justify-content: end;
+}
+
+.add-site {
+  display: flex;
+  justify-content: right;
 }

@@ -1,10 +1,11 @@
 <div class="page-container">
-<h1>Create New Shift</h1>
+
 <div class='container-dashboard flex'>
 
   <div><%= render "shared/sidebar"%></div>
 
   <div class='custom-form'>
+    <h2>Create New Shift</h2>
   <%= form_with model: @shift, local: true do |f| %>
     <div class="form-group field">
       <%= f.label :shift_date %>

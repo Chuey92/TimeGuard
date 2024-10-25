@@ -40,6 +40,7 @@ class ShiftsController < ApplicationController
 
   def destroy
     authorize @shift
+    @shift = Shift.find(params[:id])
     @shift.destroy
     redirect_to shifts_path, notice: "Shift deleted successfully."
   end

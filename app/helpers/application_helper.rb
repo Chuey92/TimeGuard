@@ -1,5 +1,4 @@
 module ApplicationHelper
-
   def shift_background_color(user)
     case user.id
     when 4
@@ -7,7 +6,7 @@ module ApplicationHelper
     when 5
       '#CCCCFF'  # 颜色为蓝绿色
     else
-       '#CCFFCC'
+      '#ffcad4'
     end
   end
 end

@@ -11,13 +11,13 @@
   <div class="page-container">
   <div class="requests-header">
     <h1>Shifts</h1>
-  
+
     <div class="text-right mb-3">
       <%= link_to "Create New Shift", new_shift_path, class: "btn btn-primary" %>
     </div>
   </div>
     <% if current_user.manager? %>
-  
+
 <% end %>
 
     <div class="card-container">
@@ -36,7 +36,7 @@
               <%= link_to edit_shift_path(shift), class: "edit-shift" do %>
                 <i class="fa-solid fa-pen-to-square"></i><span> Edit</span>
               <% end %>
-              <%= link_to shift_path(shift), method: :delete, data: { confirm: "Are you sure?" }, class: "delete-shift" do %>
+              <%= link_to shift_path(shift), method: :delete, data: { turbo_method: :delete, turbo_confirm: 'Are you sure to delete this shift?' }, class: "delete-shift" do %>
                 <i class="fa-solid fa-trash"></i><span> Delete</span>
               <% end %>
               <%= link_to clock_ins_path(shift_id: shift.id), method: :post, class: "clock-shift" do %>

@@ -5,6 +5,12 @@
 .mapboxgl-popup-content {
   text-align: center;
   font-family: "Open Sans", sans-serif;
-  color:#7128d8;
+   h4 {
+    color:#7128d8;
+  }
+
+  h5 {
+    color: #666;
+  }
   //background-image: linear-gradient(to top, #dad4ec 0%, #dad4ec 1%, #f3e7e9 100%);
 }

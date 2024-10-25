@@ -81,18 +81,22 @@
   width: 30px; // 设置固定宽度
   height: 30px; // 设置固定高度
   border-radius: 50%; // 使按钮变成圆形
-  background-color: #8A2BE2; // 浅紫色背景
+  background-color: #9370DB; // 浅紫色背景
   color: #f0f0f8; // 浅色文字
   border: none; // 移除边框
-  font-size: 28px; // 增大字体大小
+  font-size: 30px;
+  font-weight: 200;// 增大字体大小
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  opacity: 0.7;
 
   &:hover {
-    background-color: #9370DB; // 悬停时的颜色
+    opacity: 1;
+
+    background-color: #8A2BE2; // 悬停时的颜色
   }
 
   // 移除阴影
