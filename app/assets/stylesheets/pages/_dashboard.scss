@@ -203,9 +203,11 @@
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-color: #8A2BE2;
+  background-color: #9370DB;
+  opacity: 0.7;
   color: #fff;
-  font-size: 24px;
+  font-size: 30px;
+  font-weight: 200;
   border: none;
   text-decoration: none;
   display: flex;
@@ -218,7 +220,8 @@
   z-index: 10;
 
   &:hover {
-    background-color: darken(#8A2BE2, 10%);
+    background-color:#8A2BE2;
+    opacity: 1;
   }
 }
 

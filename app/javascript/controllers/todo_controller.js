@@ -8,13 +8,17 @@ export default class extends Controller {
   }
 
 
+
   loadTodos() {
     const todos = JSON.parse(localStorage.getItem('todos')) || []
     this.todoListTarget.innerHTML = '' // 清除之前的 Todo 项
-    todos.forEach(todo => {
+    todos.reverse().forEach(todo => {  // 反转顺序
       this.addTodoToList(todo.text, todo.completed)
     })
   }
+
+
+
 
   addTodo() {
     const todoText = prompt('Enter a new todo:')
